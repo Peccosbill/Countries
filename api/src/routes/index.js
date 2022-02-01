@@ -23,18 +23,6 @@ const getApi = async () => {
       };
     });
     await Country.bulkCreate(dataApi);
-    // for (let i = 0; i < country.length; i++) {
-    //   await Country.create({
-    //     id: country[i].id,
-    //     name: country[i].name,
-    //     flag: country[i].flag,
-    //     continent: country[i].continent,
-    //     capital: country[i].capital,
-    //     subregion: country[i].subregion,
-    //     area: country[i].area,
-    //     population: country[i].population,
-    //   });
-    // }
   } catch (error) {
     console.log(error);
   }
