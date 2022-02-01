@@ -53,7 +53,7 @@ router.get("/countries", async (req, res, next) => {
         },
       });
       if (result.length === 0) {
-        res.send("No existe el país buscado");
+        res.status(404).send("No existe el país buscado");
       } else {
         res.send(result);
       }
