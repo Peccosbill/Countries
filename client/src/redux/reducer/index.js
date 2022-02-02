@@ -3,11 +3,12 @@ import {
   GET_COUNTRY_ID,
   GET_COUNTRY_BY_NAME,
 } from "../actions/countriesActions";
+import { ADD_ACTIVITY_IN_COUNTRIES } from "../actions/activityActions";
 
 const initialState = {
   countries: [],
   country: {},
-  activity: [],
+  countryActivity: [],
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -23,6 +24,11 @@ export default function rootReducer(state = initialState, action) {
         country: action.payload,
       };
     case GET_COUNTRY_BY_NAME:
+      return {
+        ...state,
+        countryActivity: action.payload,
+      };
+    case ADD_ACTIVITY_IN_COUNTRIES:
       return {
         ...state,
         activity: action.payload,

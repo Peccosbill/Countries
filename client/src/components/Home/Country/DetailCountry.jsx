@@ -24,7 +24,7 @@ const Detail = styled.div`
 `;
 
 const Info = styled.div`
-color: #fff;
+  color: #fff;
 `;
 
 const Image = styled.img`
@@ -36,6 +36,20 @@ const Image = styled.img`
 
 const Span = styled.span`
   font-weight: bold;
+`;
+
+const BoxActivity = styled.div`
+  color: #fff;
+  margin-top: 1rem;
+  display: flex;
+`;
+
+const Activity = styled.div`
+  margin: 0.5rem;
+  padding: 1rem;
+  width: 12rem;
+  background: #000;
+  border-radius: 1rem;
 `;
 
 function DetailCountry({ id }) {
@@ -85,28 +99,30 @@ function DetailCountry({ id }) {
       </Detail>
       <Info>
         <h4>Actividades Turísticas</h4>
-        {country.activities?.map((act) => {
-          return (
-            <div key={act.id}>
-              <p>
-                <Span>Actividad: </Span>
-                {act.name}
-              </p>
-              <p>
-                <Span>Dificultad: </Span>
-                {act.dificult}
-              </p>
-              <p>
-                <Span>Duración: </Span>
-                {act.duration}
-              </p>
-              <p>
-                <Span>Temporada: </Span>
-                {act.season}
-              </p>
-            </div>
-          );
-        })}
+        <BoxActivity>
+          {country.activities?.map((act) => {
+            return (
+              <Activity key={act.id}>
+                <p>
+                  <Span>Actividad: </Span>
+                  {act.name}
+                </p>
+                <p>
+                  <Span>Dificultad: </Span>
+                  {act.dificult}
+                </p>
+                <p>
+                  <Span>Duración: </Span>
+                  {act.duration} hs
+                </p>
+                <p>
+                  <Span>Temporada: </Span>
+                  {act.season}
+                </p>
+              </Activity>
+            );
+          })}
+        </BoxActivity>
       </Info>
     </div>
   );
