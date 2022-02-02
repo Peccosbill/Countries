@@ -20,11 +20,11 @@ const CountriesCounteiner = styled.div`
 `;
 
 const SearchCountry = styled.div`
-${'' /* border: 1px solid black; */}
-display: flex;
-justify-content: center;
-align-items: center;
-flex-direction:row;
+  ${"" /* border: 1px solid black; */}
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
 `;
 
 // - - - - - Component - - - - -
@@ -54,7 +54,7 @@ function Countries() {
       setTimeout(() => {
         setIsLoading(false);
         setState(res.data);
-      }, 700);
+      }, 100);
     };
     fetchCountries();
   }

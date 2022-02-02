@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 // import { getCountryByName } from "../../redux/actions/countriesActions";
 import { addActivityInCountries } from "../../redux/actions/activityActions";
@@ -45,7 +45,7 @@ const Select = styled.select`
 `;
 
 //  - - - - - COMPONENTE - - - - -
-function AddAcrivity() {
+function AddActivity() {
   const dispatch = useDispatch();
 
   // Estado del formulario
@@ -54,35 +54,104 @@ function AddAcrivity() {
     dificult: "",
     duration: "",
     season: "",
-    country: [],
+    country: "",
   });
-  const [nameCountry, setNameCountry] = useState([]);
-  const [buscarPais, setBuscarPais] = useState({
+  const [searchCountry, setSearchCountry] = useState({
     paisEncontrado: [],
     paisSelecionado: [],
   });
 
-  useEffect(() => {
-    const fetchCountries = async () => {
-      const result = await axios.get(
-        `http://localhost:3001/countries?name=${addActivity.country}`
+  // MODIFICAR EL ESTADO DE "searchCountry.paisEncontrado" SEGÚN LO QUE LE PASE POR EL "addActivity.country"
+  const fetchCountries = async () => {
+    await axios
+      .get(`http://localhost:3001/countries?name=${addActivity.country}`)
+      .then((res) =>
+        setSearchCountry({
+          ...searchCountry,
+          paisEncontrado: res.data,
+        })
       );
-      setNameCountry(result.data);
-    };
-    fetchCountries();
+  };
+
+  useEffect(() => {
+    if (addActivity.country !== "") {
+      fetchCountries();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addActivity.country]);
 
+  // ESCUCHAR CAMBIOS EN EL FORMULARIO
   function handleChange(e) {
-    setAddActivity({
-      ...addActivity,
-      [e.target.name]: e.target.value,
+    setAddActivity(() => {
+      return {
+        ...addActivity,
+        [e.target.name]: e.target.value,
+      };
     });
   }
 
-  function handleSubmit(e) {
+  // POST DE LA INFO DEL FORMULARIO
+  async function handleSubmit(e) {
     e.preventDefault();
-    dispatch(addActivityInCountries(addActivity));
+
+    // Validación
+    if (
+      !addActivity.name ||
+      !addActivity.duration ||
+      !addActivity.dificult ||
+      !addActivity.season
+    ) {
+      return alert("Todos los campos deben estar completos");
+    }
+    if (searchCountry.paisSelecionado.length === 0) {
+      return alert("Debes seleccionar al menos un país");
+    } else {
+      const actividad = {
+        name: addActivity.name,
+        dificult: addActivity.dificult,
+        duration: addActivity.duration,
+        season: addActivity.season,
+        country: searchCountry.paisSelecionado,
+      };
+      dispatch(addActivityInCountries(actividad));
+      alert("Actividad creada");
+    }
+    setAddActivity({
+      name: "",
+      dificult: "",
+      duration: "",
+      season: "",
+      country: "",
+    });
+    setSearchCountry({
+      paisSelecionado: [],
+    });
   }
+  // AGREGAR PAÍS A LA ACTIVIDAD
+  const addCountry = () => {
+    if (addActivity.country === searchCountry.paisEncontrado[0]?.name) {
+      if (searchCountry.paisSelecionado.indexOf(addActivity.country) === -1) {
+        searchCountry.paisSelecionado.push(addActivity.country);
+        setAddActivity({
+          ...addActivity,
+          country: "",
+        });
+      } else {
+        alert("País ya agregado");
+      }
+    }
+  };
+
+  // BORRAR PAÍS DE LA ACTIVIDAD
+  const deleteCountry = (country) => {
+    let filterCountry = searchCountry.paisSelecionado.filter(
+      (c) => c !== country
+    );
+    setSearchCountry({
+      ...searchCountry,
+      paisSelecionado: filterCountry,
+    });
+  };
 
   return (
     <Formulario onSubmit={handleSubmit}>
@@ -99,7 +168,7 @@ function AddAcrivity() {
               value={`${addActivity.name
                 .charAt(0)
                 .toUpperCase()}${addActivity.name.slice(1)}`}
-              onChange={handleChange}
+              onChange={(e) => handleChange(e)}
             />
           </Box>
 
@@ -109,7 +178,7 @@ function AddAcrivity() {
             <Select
               name="dificult"
               value={addActivity.dificult}
-              onChange={handleChange}
+              onChange={(e) => handleChange(e)}
             >
               <option value="DEFAULT">Seleccionar Dificultad </option>
               <option name="dificult" value="1">
@@ -141,7 +210,7 @@ function AddAcrivity() {
               placeholder="Horas"
               name="duration"
               value={addActivity.duration}
-              onChange={handleChange}
+              onChange={(e) => handleChange(e)}
             />
           </Box>
 
@@ -152,7 +221,7 @@ function AddAcrivity() {
               placeholder="Temporada"
               name="season"
               value={addActivity.season}
-              onChange={handleChange}
+              onChange={(e) => handleChange(e)}
             >
               <option value="DEFAULT">Seleccionar Temporada</option>
               <option value="Primavera">Primavera</option>
@@ -166,7 +235,7 @@ function AddAcrivity() {
           <Box>
             <span>Agregar actividad a País</span>
             <datalist id="country">
-              {nameCountry.map((country) => {
+              {searchCountry.paisEncontrado?.map((country) => {
                 return <option key={country.id} value={country.name} />;
               })}
             </datalist>
@@ -175,8 +244,24 @@ function AddAcrivity() {
               name="country"
               type="text"
               value={addActivity.country}
-              onChange={handleChange}
+              onChange={(e) => handleChange(e)}
+              placeholder="País donde se realiza"
             ></Input>
+            <input type="button" onClick={addCountry} value="Agregar País" />
+          </Box>
+          <Box>
+            {searchCountry.paisSelecionado?.map((c) => {
+              return (
+                <div key={c}>
+                  <p>{c}</p>
+                  <input
+                    type="button"
+                    onClick={() => deleteCountry(c)}
+                    value="X"
+                  />
+                </div>
+              );
+            })}
           </Box>
 
           {/*- - - - - - BUTTON SUBMIT - - - - - */}
@@ -187,4 +272,4 @@ function AddAcrivity() {
   );
 }
 
-export default AddAcrivity;
+export default AddActivity;
