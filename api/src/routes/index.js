@@ -39,6 +39,9 @@ router.get("/countries", async (req, res, next) => {
             [Op.iLike]: `%${name}%`,
           },
         },
+        include: {
+          model: Activity,
+        },
       });
       if (result.length === 0) {
         res.status(404).send("No existe el país buscado");

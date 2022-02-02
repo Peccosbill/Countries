@@ -47,16 +47,20 @@ const Select = styled.select`
 //  - - - - - COMPONENTE - - - - -
 function AddAcrivity() {
   const dispatch = useDispatch();
-  const countryActivity = useSelector(state => state.countryActivity);
+
   // Estado del formulario
   const [addActivity, setAddActivity] = useState({
     name: "",
     dificult: "",
     duration: "",
     season: "",
-    country: "",
+    country: [],
   });
   const [nameCountry, setNameCountry] = useState([]);
+  const [buscarPais, setBuscarPais] = useState({
+    paisEncontrado: [],
+    paisSelecionado: [],
+  });
 
   useEffect(() => {
     const fetchCountries = async () => {
@@ -76,7 +80,7 @@ function AddAcrivity() {
   }
 
   function handleSubmit(e) {
-    // e.preventDefault();
+    e.preventDefault();
     dispatch(addActivityInCountries(addActivity));
   }
 
@@ -163,11 +167,7 @@ function AddAcrivity() {
             <span>Agregar actividad a País</span>
             <datalist id="country">
               {nameCountry.map((country) => {
-                return (
-                  <option key={country.id} value={country.name}>
-                    {country.name}
-                  </option>
-                );
+                return <option key={country.id} value={country.name} />;
               })}
             </datalist>
             <Input
@@ -180,7 +180,7 @@ function AddAcrivity() {
           </Box>
 
           {/*- - - - - - BUTTON SUBMIT - - - - - */}
-          <button type="submit">Agregar</button>
+          <button type="submit">Agregar Actividad</button>
         </Inputs>
       </div>
     </Formulario>
