@@ -1,48 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import styled from "styled-components";
-// import { getCountryByName } from "../../redux/actions/countriesActions";
 import { addActivityInCountries } from "../../redux/actions/activityActions";
-
-// - - - - - STYLED COMPONENTS - - - - -
-const Formulario = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`;
-
-const Inputs = styled.form`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
-`;
-
-const Box = styled.div`
-  width: 27rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: row;
-`;
-
-const Input = styled.input`
-  width: 15rem;
-  height: 2rem;
-  margin: 0.5rem;
-  padding-left: 1rem;
-  border-radius: 0.5rem;
-`;
-
-const Select = styled.select`
-  width: 15rem;
-  height: 2rem;
-  margin: 0.5rem;
-  padding-left: 1rem;
-  border-radius: 0.5rem;
-`;
+import styles from "./AddActivity.module.css";
 
 //  - - - - - COMPONENTE - - - - -
 function AddActivity() {
@@ -58,7 +18,7 @@ function AddActivity() {
   });
   const [searchCountry, setSearchCountry] = useState({
     paisEncontrado: [],
-    paisSelecionado: [],
+    paisSeleccionado: [],
   });
 
   // MODIFICAR EL ESTADO DE "searchCountry.paisEncontrado" SEGÚN LO QUE LE PASE POR EL "addActivity.country"
@@ -94,7 +54,7 @@ function AddActivity() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    // Validación
+    // Validar que se hayan completado todos los campos
     if (
       !addActivity.name ||
       !addActivity.duration ||
@@ -103,7 +63,7 @@ function AddActivity() {
     ) {
       return alert("Todos los campos deben estar completos");
     }
-    if (searchCountry.paisSelecionado.length === 0) {
+    if (searchCountry.paisSeleccionado.length === 0) {
       return alert("Debes seleccionar al menos un país");
     } else {
       const actividad = {
@@ -111,11 +71,13 @@ function AddActivity() {
         dificult: addActivity.dificult,
         duration: addActivity.duration,
         season: addActivity.season,
-        country: searchCountry.paisSelecionado,
+        country: searchCountry.paisSeleccionado,
       };
+      //EJECUTO LA (ACTION POST)
       dispatch(addActivityInCountries(actividad));
       alert("Actividad creada");
     }
+    //RESETEO EL FORMULARIO
     setAddActivity({
       name: "",
       dificult: "",
@@ -124,14 +86,16 @@ function AddActivity() {
       country: "",
     });
     setSearchCountry({
-      paisSelecionado: [],
+      paisSeleccionado: [],
     });
   }
+
   // AGREGAR PAÍS A LA ACTIVIDAD
   const addCountry = () => {
+    // VERIFICAR QUE EL PAÍS NO ESTE DENTRO DEL ARREGLO DE (paisSeleccionado)
     if (addActivity.country === searchCountry.paisEncontrado[0]?.name) {
-      if (searchCountry.paisSelecionado.indexOf(addActivity.country) === -1) {
-        searchCountry.paisSelecionado.push(addActivity.country);
+      if (searchCountry.paisSeleccionado.indexOf(addActivity.country) === -1) {
+        searchCountry.paisSeleccionado.push(addActivity.country);
         setAddActivity({
           ...addActivity,
           country: "",
@@ -144,24 +108,25 @@ function AddActivity() {
 
   // BORRAR PAÍS DE LA ACTIVIDAD
   const deleteCountry = (country) => {
-    let filterCountry = searchCountry.paisSelecionado.filter(
+    let filterCountry = searchCountry.paisSeleccionado.filter(
       (c) => c !== country
     );
     setSearchCountry({
       ...searchCountry,
-      paisSelecionado: filterCountry,
+      paisSeleccionado: filterCountry,
     });
   };
 
   return (
-    <Formulario onSubmit={handleSubmit}>
+    <div className={styles.contenedor} onSubmit={handleSubmit}>
       <h3>Introduce los datos para la nueva actividad</h3>
       <div>
-        <Inputs>
+        <form className={styles.formulario}>
           {/* - - - - NOMBRE DE ACTIVIDAD - - - - */}
-          <Box>
+          <div className={styles.box}>
             <span>Nombre</span>
-            <Input
+            <input
+              className={styles.input}
               type="text"
               placeholder="Nombre de actividad"
               name="name"
@@ -170,12 +135,13 @@ function AddActivity() {
                 .toUpperCase()}${addActivity.name.slice(1)}`}
               onChange={(e) => handleChange(e)}
             />
-          </Box>
+          </div>
 
           {/* - - - - - DIFICULTAD - - - - - */}
-          <Box>
+          <div className={styles.box}>
             <span>Dificultad</span>
-            <Select
+            <select
+              className={styles.select}
               name="dificult"
               value={addActivity.dificult}
               onChange={(e) => handleChange(e)}
@@ -196,13 +162,14 @@ function AddActivity() {
               <option name="dificult" value="5">
                 5
               </option>
-            </Select>
-          </Box>
+            </select>
+          </div>
 
           {/* - - - - - DURACIÓN - - - - - */}
-          <Box>
+          <div className={styles.box}>
             <span>Duración(Horas)</span>
-            <Input
+            <input
+              className={styles.input}
               type="number"
               min="1"
               max="24"
@@ -212,12 +179,13 @@ function AddActivity() {
               value={addActivity.duration}
               onChange={(e) => handleChange(e)}
             />
-          </Box>
+          </div>
 
           {/* - - - - - TEMPORADA - - - - - */}
-          <Box>
+          <div className={styles.box}>
             <span>Temporada</span>
-            <Select
+            <select
+              className={styles.select}
               placeholder="Temporada"
               name="season"
               value={addActivity.season}
@@ -228,29 +196,30 @@ function AddActivity() {
               <option value="Verano">Verano</option>
               <option value="Otoño">Otoño</option>
               <option value="Invierno">Invierno</option>
-            </Select>
-          </Box>
+            </select>
+          </div>
 
           {/* - - - - AGREGAR ACTIVIDAD A PAÍS - - - - */}
-          <Box>
+          <div className={styles.box}>
             <span>Agregar actividad a País</span>
             <datalist id="country">
               {searchCountry.paisEncontrado?.map((country) => {
                 return <option key={country.id} value={country.name} />;
               })}
             </datalist>
-            <Input
+            <input
+              className={styles.input}
               list="country"
               name="country"
               type="text"
               value={addActivity.country}
               onChange={(e) => handleChange(e)}
               placeholder="País donde se realiza"
-            ></Input>
+            ></input>
             <input type="button" onClick={addCountry} value="Agregar País" />
-          </Box>
-          <Box>
-            {searchCountry.paisSelecionado?.map((c) => {
+          </div>
+          <div className={styles.box}>
+            {searchCountry.paisSeleccionado?.map((c) => {
               return (
                 <div key={c}>
                   <p>{c}</p>
@@ -262,13 +231,13 @@ function AddActivity() {
                 </div>
               );
             })}
-          </Box>
+          </div>
 
           {/*- - - - - - BUTTON SUBMIT - - - - - */}
           <button type="submit">Agregar Actividad</button>
-        </Inputs>
+        </form>
       </div>
-    </Formulario>
+    </div>
   );
 }
 
