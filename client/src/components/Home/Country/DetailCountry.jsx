@@ -86,7 +86,7 @@ function DetailCountry({ id }) {
           </p>
           <p>
             <Span>Subregión: </Span>
-            {country.subregion}
+            {country.subregion ? country.subregion : "No tiene subregion"}
           </p>
           <p>
             <Span>Area: </Span>

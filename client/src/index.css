@@ -1,3 +1,11 @@
+:root {
+  --rich-black: #0C101B;
+  --prussian-blue: #1D283A;
+  --independence: #3C4F6C;
+  --blue-munsell: #32d3c5;
+  --candy-pink: #E9606A;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -11,7 +19,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: royalblue;
+  background: var(--prussian-blue);
 }
 
 code {

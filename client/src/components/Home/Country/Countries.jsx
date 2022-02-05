@@ -1,52 +1,31 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import Country from "./Country";
-import styled from "styled-components";
-import Spinner from "../../Spinner/Spinner";
-import Filtros from "../Filtros/Filtros";
 import { getAllActivities } from "../../../redux/actions/activityActions";
 import { HelpGetCountries } from "../../../helpers/HelpGetCountries";
-import {
-  getCountries,
-  getCountryByContinent,
-  // getCountryByContinent,
-} from "../../../redux/actions/countriesActions";
-
-// - - - - - Styled components - - - - -
-const CountriesCounteiner = styled.div`
-  background: #143642;
-  padding-top: 2rem;
-  width: 100%;
-  height: 100%;
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 320px);
-  gap: 4rem;
-  justify-content: center;
-`;
-
-const SearchCountry = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-`;
+import { getCountries } from "../../../redux/actions/countriesActions";
+import Country from "./Country";
+import styles from "./css/Countries.module.css";
+import Spinner from "../../Spinner/Spinner";
+import search from "../../../img/search.png";
 
 // - - - - - Component - - - - -
 function Countries() {
   const activities = useSelector((state) => state.activities);
   const countries = useSelector((state) => state.countries);
-  // const countriesByContinent = useSelector(
-  //   (state) => state.countriesByContinent
-  // );
   const dispatch = useDispatch();
+
   const [state, setState] = useState([]);
   const [country, setCountry] = useState("");
+
   const [activity, setActivity] = useState("");
   const [activityByCountry, setActivityByCountry] = useState([]);
+
   const [continent, setContinent] = useState("");
-  // const [countryByContinent, setCountryByContinent] = useState([]);
+
+  const [alphabet, setAlphabet] = useState("");
+
+  const [population, setPopulation] = useState("");
+
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -63,24 +42,7 @@ function Countries() {
     dispatch(getCountries());
     dispatch(getAllActivities());
 
-    // CONTINENTE
-    // if (countryByContinent !== "") {
-    //   // dispatch(getCountryByContinent(continent));
-    //   HelpGetCountries(`http://localhost:3001/continent/${continent}`).then(
-    //     (res) => {
-    //       setCountryByContinent(res.data);
-    //     }
-    //   );
-    // }
-
-    // if (continent !== "") {
-    //   const countryByContinent = countries.filter(
-    //     (c) => c.continent === continent
-    //   );
-    //   setState(countryByContinent);
-    //   console.log(countryByContinent);
-    // }
-
+    // - - - - FILTRO POR ACTIVIDAD - - - -
     if (activityByCountry !== "") {
       HelpGetCountries("http://localhost:3001/activityByCountry").then(
         (res) => {
@@ -88,9 +50,10 @@ function Countries() {
         }
       );
     }
-    // ACTIVIDAD
+
     if (activity !== "") {
       if (activity === "DEFAULT") {
+        setActivity("");
         return setState(countries);
       }
       const activityFound = activityByCountry.filter((a) => {
@@ -106,13 +69,59 @@ function Countries() {
           }
         }
       }
-
       setState(countriesToShow);
-      console.log("countriesToShow", countriesToShow);
     }
 
+    // - - - - FILTRO POR ORDEN ALFABÉTICO - - - -
+    if (alphabet !== "") {
+      if (alphabet === "DEFAULT") {
+        setAlphabet("");
+        return setState(countries);
+      }
+      if (alphabet === "A-Z") {
+        HelpGetCountries("http://localhost:3001/az").then((res) => {
+          setState(res.data);
+        });
+      }
+      if (alphabet === "Z-A") {
+        HelpGetCountries("http://localhost:3001/za").then((res) => {
+          setState(res.data);
+        });
+      }
+    }
+    // - - - - FILTRO POR CONTINENTE - - - -
+    if (continent !== "") {
+      if (continent === "DEFAULT") {
+        setContinent("");
+        return setState(countries);
+      }
+      const countryByContinent = countries.filter(
+        (c) => c.continent === continent
+      );
+
+      setState(countryByContinent);
+      console.log(countryByContinent);
+    }
+
+    //  - - - - FILTRO POR POBLACIÓN - - - -
+    if (population !== "") {
+      if (population === "DEFAULT") {
+        setPopulation("");
+        return setState(countries);
+      }
+      if (population === "higher") {
+        HelpGetCountries("http://localhost:3001/morePopulation").then((res) => {
+          setState(res.data);
+        });
+      }
+      if (population === "minor") {
+        HelpGetCountries("http://localhost:3001/lessPopulation").then((res) => {
+          setState(res.data);
+        });
+      }
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activity]);
+  }, [activity, alphabet, continent, population]);
 
   function onSearch(country) {
     if (country !== "") {
@@ -131,7 +140,7 @@ function Countries() {
   const componente = isLoading ? (
     <Spinner />
   ) : (
-    <CountriesCounteiner>
+    <div className={styles.containerCountries}>
       {state.map((country) => {
         return (
           <Country
@@ -139,54 +148,90 @@ function Countries() {
             id={country.id}
             flag={country.flag}
             name={country.name}
+            capital={country.capital}
             continent={country.continent}
           />
         );
       })}
-    </CountriesCounteiner>
+    </div>
   );
 
   return (
     <div>
-      <SearchCountry>
+      <div>
         <form
+          className={styles.searchAndFilters}
           onSubmit={(e) => {
             e.preventDefault();
             onSearch(country);
             setCountry([]);
           }}
         >
-          <input
-            type="search"
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
-            placeholder="Buscar Países"
-          />
-          <button type="submit">Buscar</button>
+          <div className={styles.searchCountry}>
+            <input
+              className={styles.searchInput}
+              type="search"
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+              placeholder="Buscar Países"
+            />
+            <button className={styles.searchButton} type="submit">
+              <img className={styles.imgSearch} src={search} alt="Search" />
+            </button>
+          </div>
+          <div className={styles.selectors}>
+            {/* <<<<<<<   ACTIVIDAD  >>>>>>*/}
+            <select
+              className={styles.select}
+              name="activity"
+              onChange={(e) => setActivity(e.target.value)}
+            >
+              <option value="DEFAULT">Actividad</option>
+              {activities?.map((a) => {
+                return (
+                  <option key={a.id} value={a.id}>
+                    {a.name}
+                  </option>
+                );
+              })}
+            </select>
+            {/* <<<<<<<<<    ALFABETO    >>>>>>> */}
+            <select
+              className={styles.select}
+              name="alphabet"
+              onChange={(e) => setAlphabet(e.target.value)}
+            >
+              <option value="DEFAULT">Orden Alfabético</option>
+              <option value="A-Z">A - Z</option>
+              <option value="Z-A">Z - A</option>
+            </select>
+            {/* <<<<<<<    CONTINENTE    >>>>>> */}
+            <select
+              className={styles.select}
+              name="continent"
+              onChange={(e) => setContinent(e.target.value)}
+            >
+              <option value="DEFAULT">Continente</option>
+              <option value="Africa">Africa</option>
+              <option value="Americas">America</option>
+              <option value="Antarctic">Antartida</option>
+              <option value="Asia">Asia</option>
+              <option value="Europe">Europa</option>
+              <option value="Oceania">Oceania</option>
+            </select>
+            {/* <<<<<<<<   POBLACIÓN   >>>>>>> */}
+            <select
+              className={styles.select}
+              name="population"
+              onChange={(e) => setPopulation(e.target.value)}
+            >
+              <option value="DEFAULT">Orden por población</option>
+              <option value="higher">Mayor Población</option>
+              <option value="minor">Menor Población</option>
+            </select>
+          </div>
         </form>
-        {/* ACTIVIDAD */}
-        <select name="activity" onChange={(e) => setActivity(e.target.value)}>
-          <option value="DEFAULT">Actividad</option>
-          {activities?.map((a) => {
-            return (
-              <option key={a.id} value={a.id}>
-                {a.name}
-              </option>
-            );
-          })}
-        </select>
-        {/* CONTINENTE */}
-        <select name="continent" onChange={(e) => setContinent(e.target.value)}>
-          <option value="DEFAULT">Continente</option>
-          <option value="Afica">Africa</option>
-          <option value="Americas">America</option>
-          <option value="Antarctic">Antartica</option>
-          <option value="Asia">Asia</option>
-          <option value="Europe">Europa</option>
-          <option value="Oceania">Oceania</option>
-        </select>
-        <Filtros />
-      </SearchCountry>
+      </div>
       {componente}
     </div>
   );
