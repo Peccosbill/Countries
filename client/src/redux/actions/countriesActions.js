@@ -2,6 +2,7 @@ import axios from "axios";
 export const GET_COUNTRIES = "GET_COUNTRIES";
 export const GET_COUNTRY_ID = "GET_COUNTRY_ID";
 export const GET_COUNTRY_BY_NAME = "GET_COUNTRY_BY_NAME";
+export const GET_COUNTRY_BY_CONTINENT = "GET_COUNTRY_BY_CONTINENT";
 
 export function getCountries() {
   return async function (dispatch) {
@@ -42,4 +43,15 @@ export function getCountryByName(name) {
   };
 }
 
-
+export function getCountryByContinent(continent) {
+  return async function (dispatch) {
+    return await axios
+      .get(`http://localhost:3001/continent/${continent}`)
+      .then((response) => {
+        dispatch({
+          type: GET_COUNTRY_BY_CONTINENT,
+          payload: response.data,
+        });
+      });
+  };
+}

@@ -2,13 +2,15 @@ import {
   GET_COUNTRIES,
   GET_COUNTRY_ID,
   GET_COUNTRY_BY_NAME,
+  GET_COUNTRY_BY_CONTINENT,
 } from "../actions/countriesActions";
-import { ADD_ACTIVITY_IN_COUNTRIES } from "../actions/activityActions";
+import { GET_ALL_ACTIVITIES } from "../actions/activityActions";
 
 const initialState = {
   countries: [],
   country: {},
-  countryActivity: [],
+  countriesByContinent: [],
+  activities: [],
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -26,12 +28,22 @@ export default function rootReducer(state = initialState, action) {
     case GET_COUNTRY_BY_NAME:
       return {
         ...state,
-        countryActivity: action.payload,
+        countries: action.payload,
       };
-    case ADD_ACTIVITY_IN_COUNTRIES:
+    case GET_COUNTRY_BY_CONTINENT:
       return {
         ...state,
-        activity: action.payload,
+        countries: action.payload,
+      };
+    // case ADD_ACTIVITY_IN_COUNTRIES:
+    //   return {
+    //     ...state,
+    //     activity: action.payload,
+    //   };
+    case GET_ALL_ACTIVITIES:
+      return {
+        ...state,
+        activities: action.payload,
       };
     default:
       return state;

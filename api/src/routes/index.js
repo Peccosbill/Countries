@@ -2,7 +2,7 @@ const { Router } = require("express");
 const axios = require("axios");
 const { Op } = require("sequelize");
 const { URL_API } = require("../../constants.js");
-const { Country, Activity } = require("../db");
+const { Country, Activity, CountryActivities } = require("../db");
 
 const router = Router();
 
@@ -52,7 +52,11 @@ router.get("/countries", async (req, res, next) => {
       res.send(error);
     }
   } else {
-    const results = await Country.findAll();
+    const results = await Country.findAll({
+      include: {
+        model: Activity,
+      },
+    });
     if (results.length === 0) {
       await getApi();
       res.send(await Country.findAll());
@@ -76,10 +80,75 @@ router.get("/countries/:id", async (req, res) => {
   }
 });
 
+// - - - - RUTAS PARA FILTROS - - - -
+
+// POR ALFABETO
+router.get("/az", async (req, res) => {
+  let az = await Country.findAll({
+    order: [["name", "ASC"]],
+  });
+  return res.send(az);
+});
+
+router.get("/za", async (req, res) => {
+  let za = await Country.findAll({
+    order: [["name", "DESC"]],
+  });
+  res.send(za);
+});
+
+// POR POBLACIÓN
+router.get("/lessPopulation", async (req, res) => {
+  let population = await Country.findAll({
+    order: [["population", "ASC"]],
+  });
+  res.send(population);
+});
+
+router.get("/morePopulation", async (req, res) => {
+  let population = await Country.findAll({
+    order: [["population", "DESC"]],
+  });
+  res.send(population);
+});
+
+// POR CONTINENTE
+router.get("/continent/:continent", async (req, res) => {
+  const continent = `${req.params.continent
+    .charAt(0)
+    .toUpperCase()}${req.params.continent.slice(1)}`;
+  try {
+    let cont = await Country.findAll({
+      where: {
+        continent: continent,
+      },
+    });
+    res.send(cont);
+  } catch (error) {
+    res.send(error);
+  }
+});
+
+//  POR ACTIVIDAD
 router.get("/activity", async (req, res) => {
   const activity = await Activity.findAll();
   res.send(activity);
 });
+
+router.get("/activityByCountry/:activityId", async (req, res) => {
+  const { activityId } = req.params;
+  const activityByCountry = await CountryActivities.findAll({
+    where: { activityId: activityId },
+  });
+  res.send(activityByCountry);
+});
+
+router.get("/activityByCountry", async (req, res) => {
+  const activityByCountry = await CountryActivities.findAll();
+  res.send(activityByCountry);
+});
+
+// - - - - RUTAS DE ACTIVIDAD - - - -
 
 router.post("/activity", async (req, res) => {
   const { name, dificult, duration, season, country } = req.body;
