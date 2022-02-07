@@ -4,9 +4,10 @@ import { getAllActivities } from "../../../redux/actions/activityActions";
 import { HelpGetCountries } from "../../../helpers/HelpGetCountries";
 import { getCountries } from "../../../redux/actions/countriesActions";
 import Country from "./Country";
-import styles from "./css/Countries.module.css";
 import Spinner from "../../Spinner/Spinner";
+import Pagination from "../Pagination/Pagination";
 import search from "../../../img/search.png";
+import styles from "./css/Countries.module.css";
 
 // - - - - - Component - - - - -
 function Countries() {
@@ -28,6 +29,10 @@ function Countries() {
 
   const [isLoading, setIsLoading] = useState(true);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [countriesPerPage] = useState(10);
+
+  //  - - -> PAGINACION <- - -
   useEffect(() => {
     setIsLoading(true);
     HelpGetCountries(`http://localhost:3001/countries`).then((res) => {
@@ -38,6 +43,18 @@ function Countries() {
     });
   }, []);
 
+  // MOSTRAR LOS PAISES ACTUALES
+  const indexOfLastCountries = currentPage * countriesPerPage;
+  const indexOfFirstCountries = indexOfLastCountries - countriesPerPage;
+  const currentCountries = state.slice(
+    indexOfFirstCountries,
+    indexOfLastCountries
+  );
+
+  // CAMBIAR DE PÁGINA
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  //  - - -> FILTROS <- - -
   useEffect(() => {
     dispatch(getCountries());
     dispatch(getAllActivities());
@@ -126,33 +143,37 @@ function Countries() {
   function onSearch(country) {
     if (country !== "") {
       setIsLoading(true);
-      HelpGetCountries(`http://localhost:3001/countries/?name=${country}`).then(
-        (res) => {
-          setTimeout(() => {
+      HelpGetCountries(`http://localhost:3001/countries/?name=${country}`)
+        .then((res) => {
+          return setTimeout(() => {
             setIsLoading(false);
             setState(res.data);
           }, 1000);
-        }
-      );
+        })
+        .catch(async (err) => {
+          alert((err = "No se encuentra el país buscado"));
+        });
     }
   }
 
   const componente = isLoading ? (
     <Spinner />
   ) : (
-    <div className={styles.containerCountries}>
-      {state.map((country) => {
-        return (
-          <Country
-            key={country.id}
-            id={country.id}
-            flag={country.flag}
-            name={country.name}
-            capital={country.capital}
-            continent={country.continent}
-          />
-        );
-      })}
+    <div>
+      <div className={styles.containerCountries}>
+        {currentCountries.map((country) => {
+          return (
+            <Country
+              key={country.id}
+              id={country.id}
+              flag={country.flag}
+              name={country.name}
+              capital={country.capital}
+              continent={country.continent}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 
@@ -186,7 +207,7 @@ function Countries() {
               name="activity"
               onChange={(e) => setActivity(e.target.value)}
             >
-              <option value="DEFAULT">Actividad</option>
+              <option value="DEFAULT">Todas las Actividades</option>
               {activities?.map((a) => {
                 return (
                   <option key={a.id} value={a.id}>
@@ -233,6 +254,11 @@ function Countries() {
         </form>
       </div>
       {componente}
+      <Pagination
+        countriesPerPage={countriesPerPage}
+        totalCountries={state.length}
+        paginate={paginate}
+      />
     </div>
   );
 }

@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { addActivityInCountries } from "../../redux/actions/activityActions";
 import styles from "./AddActivity.module.css";
+import home from "../../img/home.png";
 
 //  - - - - - COMPONENTE - - - - -
 function AddActivity() {
@@ -118,10 +120,10 @@ function AddActivity() {
   };
 
   return (
-    <div className={styles.contenedor} onSubmit={handleSubmit}>
+    <div className={styles.contenedor}>
       <h3>Introduce los datos para la nueva actividad</h3>
       <div>
-        <form className={styles.formulario}>
+        <form className={styles.formulario} onSubmit={handleSubmit}>
           {/* - - - - NOMBRE DE ACTIVIDAD - - - - */}
           <div className={styles.box}>
             <span>Nombre</span>
@@ -168,17 +170,19 @@ function AddActivity() {
           {/* - - - - - DURACIÓN - - - - - */}
           <div className={styles.box}>
             <span>Duración(Horas)</span>
-            <input
-              className={styles.input}
-              type="number"
-              min="1"
-              max="24"
-              step="1"
-              placeholder="Horas"
+            <select
+              className={styles.select}
+              placeholder="Duración de la actividad"
               name="duration"
               value={addActivity.duration}
               onChange={(e) => handleChange(e)}
-            />
+            >
+              <option value="DEFAULT">Duración de la actividad</option>
+              <option value="1 Hora">1 Hora</option>
+              <option value="2 Horas">2 Horas</option>
+              <option value="3 Horas">3 Horas</option>
+              <option value="Más de 5 Horas">Más de 5 Horas</option>
+            </select>
           </div>
 
           {/* - - - - - TEMPORADA - - - - - */}
@@ -207,21 +211,28 @@ function AddActivity() {
                 return <option key={country.id} value={country.name} />;
               })}
             </datalist>
-            <input
-              className={styles.input}
-              list="country"
-              name="country"
-              type="text"
-              value={addActivity.country}
-              onChange={(e) => handleChange(e)}
-              placeholder="País donde se realiza"
-            ></input>
-            <input type="button" onClick={addCountry} value="Agregar País" />
+            <div className={styles.boxCountry}>
+              <input
+                className={styles.inputCountry}
+                list="country"
+                name="country"
+                type="text"
+                value={addActivity.country}
+                onChange={(e) => handleChange(e)}
+                placeholder="Agregar país"
+              ></input>
+              <input
+                className={styles.add}
+                type="button"
+                onClick={addCountry}
+                value="+"
+              />
+            </div>
           </div>
-          <div className={styles.box}>
+          <div className={styles.containerCountries}>
             {searchCountry.paisSeleccionado?.map((c) => {
               return (
-                <div key={c}>
+                <div className={styles.countrySelect} key={c}>
                   <p>{c}</p>
                   <input
                     type="button"
@@ -237,6 +248,10 @@ function AddActivity() {
           <button type="submit">Agregar Actividad</button>
         </form>
       </div>
+      <Link className={styles.toHome} to="/home">
+        <img src={home} alt="Home" />
+        <h6>Home</h6>
+      </Link>
     </div>
   );
 }

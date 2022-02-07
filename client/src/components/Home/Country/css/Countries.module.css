@@ -1,10 +1,7 @@
 .searchAndFilters {
-  /* border: 1px solid #fff; */
   margin: 2rem auto;
   width: 80%;
   display: flex;
-  /* justify-content: flex-end; */
-  /* align-items: center; */
   flex-direction: column;
 }
 
@@ -20,23 +17,33 @@
   font-size: 1rem;
   margin: 1rem 2rem 1rem 2rem;
   padding: 0.5rem;
-  width: 12rem;
+  width: 13rem;
   height: 2.2rem;
-  color: #fff;
+  color: var(--white);
   border: none;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  outline: none;
   background: var(--independence);
+  background-image: url(../../../../img/arrow.png);
+  background-repeat: no-repeat;
+  background-position: 95%;
+  background-size: 1.5rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
 }
 
 .select option {
-  margin-top: 2rem;
-  background: #1D283A;
+  background: #1d283a;
 }
 
 .searchCountry {
   box-shadow: 0 0 1rem var(--rich-black);
   margin: 0 auto;
   margin-bottom: 1rem;
-  width: 14rem;
+  width: 13rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,8 +53,9 @@
 .searchInput {
   padding: 0.5rem;
   height: 2.2rem;
-  color: #fff;
+  color: var(--white);
   border: none;
+  border-radius: 0.2rem 0 0 0.2rem;
   background: var(--independence);
   outline: none;
 }
@@ -60,7 +68,13 @@
   padding: 0.5rem;
   height: 2.2rem;
   border: none;
+  border-radius: 0 0.2rem 0.2rem 0;
   background: var(--independence);
+  cursor: pointer;
+}
+
+.searchButton:hover {
+  filter: brightness(80%);
 }
 
 .imgSearch {
@@ -75,7 +89,37 @@
   height: 100%;
   min-height: 100vh;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 320px);
+  grid-template-columns: repeat(auto-fill, 240px);
   gap: 4rem;
   justify-content: center;
+}
+
+.paginationBttns {
+  width: 80%;
+  height: 3rem;
+  margin: 1rem auto;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+.paginationBttns a {
+  padding: 1rem;
+  margin: 0.5rem;
+  border-radius: 0.2rem;
+  color: var(--white);
+  background: var(--independence);
+  box-shadow: 0 0 1rem var(--rich-black);
+  cursor: pointer;
+}
+
+.paginationBttns a:hover {
+  color: var(--white);
+  background-color: var(--candy-pink);
+}
+
+.paginationActive a {
+  color: var(--independence);
+  background-color: var(--white);
+  padding: 1.2rem;
 }

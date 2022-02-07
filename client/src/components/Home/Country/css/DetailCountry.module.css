@@ -1,0 +1,88 @@
+.country {
+  position: relative;
+  margin: 4rem auto;
+  padding: 2rem;
+  width: 90%;
+  max-width: 50rem;
+  height: 40rem;
+  background: var(--rich-black);
+  box-shadow: 0 0 1rem var(--rich-black);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.detail {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.info {
+  color: var(--white);
+  padding: 1rem;
+}
+
+.info h4 {
+  padding: 0.8rem;
+  background: linear-gradient(90deg, var(--prussian-blue) 0%, transparent 45%);
+  /* box-shadow: 0 0 1rem var(--black); */
+}
+
+.info p {
+  /* line-height: 2rem; */
+}
+
+.image {
+  margin-right: 2rem;
+  width: 20rem;
+  height: auto;
+  box-shadow: 0 0 1rem var(--black);
+  /* border-radius: 1rem; */
+}
+
+.span {
+  font-weight: bold;
+  color: var(--blue-munsell-dark);
+}
+
+.boxActivity {
+  /* border: 1px solid #f00; */
+  color: var(--white);
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 220px);
+  gap: 1rem;
+  /* justify-content: center; */
+}
+
+.activity {
+  /* border: 1px solid #0f0; */
+  padding: 1rem;
+  width: 12rem;
+  background: var(--prussian-blue);
+  box-shadow: 0 0 1rem var(--black);
+}
+
+.toHome {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  text-align: center;
+  text-decoration: none;
+  background: var(--independence);
+  border-radius: 0.2rem;
+  box-shadow: 0 0 1rem var(--black);
+  transition: all 0.2s;
+}
+
+.toHome:hover {
+  transform: scale(1.1);
+}
+
+.toHome h6 {
+  font-size: 1rem;
+  color: var(--white);
+}

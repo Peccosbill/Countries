@@ -1,56 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCountryId } from "../../../redux/actions/countriesActions";
-import styled from "styled-components";
+import { Link } from "react-router-dom";
+import {
+  getCountryId,
+  resetCountry,
+} from "../../../redux/actions/countriesActions";
+import styles from "./css/DetailCountry.module.css";
 import Spinner from "../../Spinner/Spinner";
-
-const Country = styled.div`
-  margin: 2rem auto;
-  padding: 2rem;
-  width: 90%;
-  max-width: 50rem;
-  height: 100%;
-  background: #143642;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`;
-
-const Detail = styled.div`
-  padding: 2rem;
-  display: flex;
-  flex-direction: row;
-`;
-
-const Info = styled.div`
-  color: #fff;
-`;
-
-const Image = styled.img`
-  margin-right: 2rem;
-  width: 20rem;
-  min-height: 12rem;
-  border-radius: 1rem;
-`;
-
-const Span = styled.span`
-  font-weight: bold;
-`;
-
-const BoxActivity = styled.div`
-  color: #fff;
-  margin-top: 1rem;
-  display: flex;
-`;
-
-const Activity = styled.div`
-  margin: 0.5rem;
-  padding: 1rem;
-  width: 12rem;
-  background: #000;
-  border-radius: 1rem;
-`;
+import home from "../../../img/home.png";
 
 function DetailCountry({ id }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -62,72 +19,79 @@ function DetailCountry({ id }) {
     setTimeout(() => {
       dispatch(getCountryId(id));
       setIsLoading(false);
+      return () => {
+        dispatch(resetCountry());
+      };
     }, 1000);
   }, [dispatch, id]);
 
   const component = isLoading ? (
     <Spinner />
   ) : (
-    <div>
-      <Detail>
-        <Image src={country.flag} alt={country.name} />
-        <Info>
+    <div className={styles.container}>
+      <div className={styles.detail}>
+        <img className={styles.image} src={country.flag} alt={country.name} />
+        <div className={styles.info}>
           <p>
-            <Span>Código del País: </Span>
+            <span className={styles.span}>Código del País: </span>
             {country.id}
           </p>
           <p>
-            <Span>País: </Span>
+            <span className={styles.span}>País: </span>
             {country.name}
           </p>
           <p>
-            <Span>Capital: </Span>
+            <span className={styles.span}>Capital: </span>
             {country.capital}
           </p>
           <p>
-            <Span>Subregión: </Span>
+            <span className={styles.span}>Subregión: </span>
             {country.subregion ? country.subregion : "No tiene subregion"}
           </p>
           <p>
-            <Span>Area: </Span>
+            <span className={styles.span}>Area: </span>
             {country.area} km2
           </p>
           <p>
-            <Span>Población:</Span> {country.population}
+            <span className={styles.span}>Población:</span> {country.population}
           </p>
-        </Info>
-      </Detail>
-      <Info>
+        </div>
+      </div>
+      <div className={styles.info}>
         <h4>Actividades Turísticas</h4>
-        <BoxActivity>
+        <div className={styles.boxActivity}>
           {country.activities?.map((act) => {
             return (
-              <Activity key={act.id}>
+              <div className={styles.activity} key={act.id}>
                 <p>
-                  <Span>Actividad: </Span>
+                  <span className={styles.span}>Actividad: </span>
                   {act.name}
                 </p>
                 <p>
-                  <Span>Dificultad: </Span>
+                  <span className={styles.span}>Dificultad: </span>
                   {act.dificult}
                 </p>
                 <p>
-                  <Span>Duración: </Span>
-                  {act.duration} hs
+                  <span className={styles.span}>Duración: </span>
+                  {act.duration}
                 </p>
                 <p>
-                  <Span>Temporada: </Span>
+                  <span className={styles.span}>Temporada: </span>
                   {act.season}
                 </p>
-              </Activity>
+              </div>
             );
           })}
-        </BoxActivity>
-      </Info>
+        </div>
+      </div>
+      <Link className={styles.toHome} to="/home">
+        <img src={home} alt="Home" />
+        <h6>Home</h6>
+      </Link>
     </div>
   );
 
-  return <Country>{component}</Country>;
+  return <div className={styles.country}>{component}</div>;
 }
 
 export default DetailCountry;

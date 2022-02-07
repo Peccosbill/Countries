@@ -1,5 +1,5 @@
 .nav {
-  background: #3C4F6C;
+  background: #3c4f6c;
   width: 100%;
   height: 3.5rem;
   box-shadow: 0 0 1rem var(--rich-black);
@@ -27,6 +27,7 @@
   margin-right: 2rem;
   height: 2.2rem;
   background: var(--candy-pink);
+  border-radius: 0.2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -34,7 +35,8 @@
 }
 
 .link:hover {
-  background: var(--blue-munsell);
+  /* background: var(--blue-munsell); */
+  filter: brightness(80%);
 }
 
 .plus {

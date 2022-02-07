@@ -1,8 +1,17 @@
 .contenedor {
+  position: relative;
+  width: 50rem;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: var(--rich-black);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.contenedor h3 {
+  color: var(--white);
 }
 
 .formulario {
@@ -10,6 +19,21 @@
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
+}
+
+.formulario button {
+  width: 8rem;
+  height: 2rem;
+  border: none;
+  border-radius: 0.2rem;
+  background: var(--blue-munsell);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.formulario button:hover {
+  filter: brightness(80%);
+  transform: scale(1.05);
 }
 
 .box {
@@ -20,12 +44,45 @@
   flex-direction: row;
 }
 
+.box span {
+  color: var(--white);
+}
+
 .input {
   width: 15rem;
   height: 2rem;
   margin: 0.5rem;
   padding-left: 1rem;
-  border-radius: 0.5rem;
+  border: none;
+  border-radius: 0.2rem;
+  outline: none;
+}
+
+.boxCountry {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem;
+}
+
+.inputCountry {
+  width: 13rem;
+  height: 2rem;
+  padding-left: 1rem;
+  border-radius: 0.2rem 0 0 0.2rem;
+  border: none;
+  outline: none;
+}
+
+.add {
+  font-size: 1.5rem;
+  color: var(--white);
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 0 0.2rem 0.2rem 0;
+  background: var(--independence);
+  cursor: pointer;
 }
 
 .select {
@@ -33,5 +90,61 @@
   height: 2rem;
   margin: 0.5rem;
   padding-left: 1rem;
-  border-radius: 0.5rem;
+  border-radius: 0.2rem;
+  outline: none;
+  cursor: pointer;
+}
+
+.containerCountries {
+  margin: 1rem;
+  width: 45rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 160px);
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.countrySelect {
+  color: var(--white);
+  background: var(--independence);
+  width: 10rem;
+  height: 3rem;
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.countrySelect input {
+  color: var(--white);
+  width: 1.2rem;
+  height: 1.2rem;
+  font-weight: bold;
+  border-radius: 0.2rem;
+  border: none;
+  background: var(--button);
+  cursor: pointer;
+}
+
+.toHome {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  text-align: center;
+  text-decoration: none;
+  background: var(--independence);
+  border-radius: 0.2rem;
+  box-shadow: 0 0 1rem var(--black);
+  transition: all 0.2s;
+}
+
+.toHome:hover {
+  transform: scale(1.1);
+}
+
+.toHome h6 {
+  font-size: 1rem;
+  color: var(--white);
 }
