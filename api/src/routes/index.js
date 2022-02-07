@@ -49,7 +49,7 @@ router.get("/countries", async (req, res, next) => {
         res.send(result);
       }
     } catch (error) {
-      res.send(error);
+      res.status(400).send(error);
     }
   } else {
     const results = await Country.findAll({
@@ -135,16 +135,16 @@ router.get("/activity", async (req, res) => {
   res.send(activity);
 });
 
+router.get("/activityByCountry", async (req, res) => {
+  const activityByCountry = await CountryActivities.findAll();
+  res.send(activityByCountry);
+});
+
 router.get("/activityByCountry/:activityId", async (req, res) => {
   const { activityId } = req.params;
   const activityByCountry = await CountryActivities.findAll({
     where: { activityId: activityId },
   });
-  res.send(activityByCountry);
-});
-
-router.get("/activityByCountry", async (req, res) => {
-  const activityByCountry = await CountryActivities.findAll();
   res.send(activityByCountry);
 });
 
