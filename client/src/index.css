@@ -2,6 +2,7 @@
 
 :root {
   --white: #fff;
+  --white-transparent: rgba(255, 255, 255, 0.514);
   --black: #000;
   --rich-black: #0c101b;
   --prussian-blue: #1d283a;

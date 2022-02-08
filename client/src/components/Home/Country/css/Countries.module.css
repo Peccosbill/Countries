@@ -36,7 +36,7 @@
 }
 
 .select option {
-  background: #1d283a;
+  background: var(--prussian-blue);
 }
 
 .searchCountry {

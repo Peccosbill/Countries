@@ -32,6 +32,7 @@ function DetailCountry({ id }) {
       <div className={styles.detail}>
         <img className={styles.image} src={country.flag} alt={country.name} />
         <div className={styles.info}>
+          <h3>Información del País</h3>
           <p>
             <span className={styles.span}>Código del País: </span>
             {country.id}
@@ -50,14 +51,20 @@ function DetailCountry({ id }) {
           </p>
           <p>
             <span className={styles.span}>Area: </span>
-            {country.area} km2
+            {new Intl.NumberFormat('es-MX').format(country.area)} km2
           </p>
           <p>
-            <span className={styles.span}>Población:</span> {country.population}
+            <span className={styles.span}>Población:</span> {new Intl.NumberFormat('es-MX').format(country.population)}
+          </p>
+          <p>
+            <span className={styles.span}>Ver ubicación:</span>
+            <a href={country.map} target="_blank" rel="noreferrer">
+              Ir a Google Maps
+            </a>
           </p>
         </div>
       </div>
-      <div className={styles.info}>
+      <div className={styles.infoActivity}>
         <h4>Actividades Turísticas</h4>
         <div className={styles.boxActivity}>
           {country.activities?.map((act) => {

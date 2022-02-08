@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./css/Country.module.css";
 
-function Country({ id, flag, name, capital, continent }) {
+function Country({ id, flag, name, capital, continent, languages }) {
   return (
     <div className={styles.card} key={id}>
       <NavLink className={styles.link}to={`/country/${id}`}>

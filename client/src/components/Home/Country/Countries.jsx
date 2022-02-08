@@ -32,7 +32,7 @@ function Countries() {
   const [currentPage, setCurrentPage] = useState(1);
   const [countriesPerPage] = useState(10);
 
-  //  - - -> PAGINACION <- - -
+  // - - - - - - -> PAGINACION <- - - - - - -
   useEffect(() => {
     setIsLoading(true);
     HelpGetCountries(`http://localhost:3001/countries`).then((res) => {
@@ -54,12 +54,12 @@ function Countries() {
   // CAMBIAR DE PÁGINA
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  //  - - -> FILTROS <- - -
+  // - - - - - - -> FILTROS <- - - - - - -
   useEffect(() => {
     dispatch(getCountries());
     dispatch(getAllActivities());
 
-    // - - - - FILTRO POR ACTIVIDAD - - - -
+    // FILTRO POR ACTIVIDAD
     if (activityByCountry !== "") {
       HelpGetCountries("http://localhost:3001/activityByCountry").then(
         (res) => {
@@ -89,7 +89,7 @@ function Countries() {
       setState(countriesToShow);
     }
 
-    // - - - - FILTRO POR ORDEN ALFABÉTICO - - - -
+    // FILTRO POR ORDEN ALFABÉTICO
     if (alphabet !== "") {
       if (alphabet === "DEFAULT") {
         setAlphabet("");
@@ -106,7 +106,7 @@ function Countries() {
         });
       }
     }
-    // - - - - FILTRO POR CONTINENTE - - - -
+    // FILTRO POR CONTINENTE
     if (continent !== "") {
       if (continent === "DEFAULT") {
         setContinent("");
@@ -120,7 +120,7 @@ function Countries() {
       console.log(countryByContinent);
     }
 
-    //  - - - - FILTRO POR POBLACIÓN - - - -
+    //  FILTRO POR POBLACIÓN
     if (population !== "") {
       if (population === "DEFAULT") {
         setPopulation("");
@@ -150,7 +150,11 @@ function Countries() {
             setState(res.data);
           }, 1000);
         })
-        .catch(async (err) => {
+        .catch((err) => {
+          HelpGetCountries("http://localhost:3001/countries").then((res) => {
+            setIsLoading(false);
+            setState(res.data);
+          });
           alert((err = "No se encuentra el país buscado"));
         });
     }

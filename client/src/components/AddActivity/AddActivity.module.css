@@ -8,10 +8,13 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  border-radius: 0.2rem;
 }
 
 .contenedor h3 {
-  color: var(--white);
+  font-size: 1.5em;
+  color: var(--blue-munsell);
+  margin-bottom: 1rem;
 }
 
 .formulario {
@@ -22,10 +25,13 @@
 }
 
 .formulario button {
-  width: 8rem;
+  width: 10rem;
   height: 2rem;
+  font-size: 1rem;
+  font-weight: bold;
   border: none;
   border-radius: 0.2rem;
+  color: var(--independence);
   background: var(--blue-munsell);
   cursor: pointer;
   transition: 0.2s;
@@ -52,10 +58,17 @@
   width: 15rem;
   height: 2rem;
   margin: 0.5rem;
-  padding-left: 1rem;
+  padding: 1rem;
+  font-size: 1rem;
   border: none;
   border-radius: 0.2rem;
   outline: none;
+  color: var(--white);
+  background: var(--independence);
+}
+
+input::placeholder {
+  color: var(--white-transparent);
 }
 
 .boxCountry {
@@ -66,23 +79,30 @@
 }
 
 .inputCountry {
-  width: 13rem;
+  width: 12rem;
   height: 2rem;
   padding-left: 1rem;
+  font-size: 1rem;
   border-radius: 0.2rem 0 0 0.2rem;
   border: none;
   outline: none;
+  color: var(--white);
+  background: var(--independence);
 }
 
 .add {
   font-size: 1.5rem;
   color: var(--white);
-  width: 2rem;
+  width: 3rem;
   height: 2rem;
   border: none;
   border-radius: 0 0.2rem 0.2rem 0;
-  background: var(--independence);
+  background: var(--candy-pink);
   cursor: pointer;
+}
+
+.add:hover {
+  filter: brightness(80%);
 }
 
 .select {
@@ -90,16 +110,28 @@
   height: 2rem;
   margin: 0.5rem;
   padding-left: 1rem;
+  font-size: 1rem;
+  color: var(--white);
+  background: var(--independence);
+  border: none;
   border-radius: 0.2rem;
   outline: none;
   cursor: pointer;
+  background-image: url(../../img/arrow.png);
+  background-repeat: no-repeat;
+  background-position: 95%;
+  background-size: 1.5rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
 }
 
 .containerCountries {
   margin: 1rem;
   width: 45rem;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 160px);
+  grid-template-columns: repeat(auto-fill, 220px);
   gap: 1rem;
   justify-content: space-between;
   align-items: center;
@@ -108,9 +140,9 @@
 .countrySelect {
   color: var(--white);
   background: var(--independence);
-  width: 10rem;
-  height: 3rem;
-  padding: 0.5rem;
+  width: 14rem;
+  height: 2.2rem;
+  padding-left: 1rem;
   border-radius: 0.2rem;
   display: flex;
   justify-content: space-between;
@@ -119,13 +151,18 @@
 
 .countrySelect input {
   color: var(--white);
-  width: 1.2rem;
-  height: 1.2rem;
+  width: 20%;
+  height: 100%;
+  font-size: 1.2rem;
   font-weight: bold;
-  border-radius: 0.2rem;
+  border-radius: 0 0.2rem 0.2rem 0;
   border: none;
   background: var(--button);
   cursor: pointer;
+}
+
+.countrySelect input:hover {
+  filter: brightness(80%);
 }
 
 .toHome {

@@ -129,8 +129,8 @@ function AddActivity() {
             <span>Nombre</span>
             <input
               className={styles.input}
-              type="text"
-              placeholder="Nombre de actividad"
+              type="search"
+              placeholder="Introduce actividad"
               name="name"
               value={`${addActivity.name
                 .charAt(0)
@@ -216,7 +216,7 @@ function AddActivity() {
                 className={styles.inputCountry}
                 list="country"
                 name="country"
-                type="text"
+                type="search"
                 value={addActivity.country}
                 onChange={(e) => handleChange(e)}
                 placeholder="Agregar país"
