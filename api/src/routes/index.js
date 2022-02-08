@@ -20,6 +20,7 @@ const getApi = async () => {
         subregion: c.subregion,
         area: c.area,
         population: c.population,
+        map: c.maps.googleMaps,
       };
     });
     await Country.bulkCreate(dataApi);
