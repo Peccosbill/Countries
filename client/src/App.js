@@ -1,4 +1,4 @@
-import { Route } from "react-router-dom";
+import {  Route } from "react-router-dom";
 import DetailCountry from "./components/Home/Country/DetailCountry";
 import Home from "./components/Home/Home";
 import LandingPage from "./components/LandingPage/LandingPage";
@@ -15,6 +15,8 @@ function App() {
         render={({ match }) => <DetailCountry id={match.params.id} />}
       />
       <Route exact path={"/addactivity"} component={AddActivity} />
+      {/* <Route path="/404" component={Error404} />
+      <Redirect from="*" to="/404" /> */}
     </div>
   );
 }

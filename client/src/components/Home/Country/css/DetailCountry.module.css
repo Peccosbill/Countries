@@ -16,8 +16,8 @@
 
 .detail {
   position: absolute;
-  top: 2rem;
-  left: 2rem;
+  top: 1rem;
+  left: 1rem;
   padding: 1rem;
   display: flex;
   justify-content: space-between;
@@ -43,7 +43,8 @@
 
 .image {
   margin-right: 2rem;
-  width: 20rem;
+  width: 23rem;
+  max-height: 23rem;
   height: auto;
   box-shadow: 0 0 1rem var(--black);
   border-radius: 0.2rem;
@@ -70,9 +71,9 @@
 
 .infoActivity {
   position: absolute;
-  /* top: 24rem; */
+  top: 23rem;
+  left: 1rem;
   margin-top: 2rem;
-  left: 2rem;
   width: 93%;
   color: var(--white);
   padding: 1rem;
@@ -102,7 +103,7 @@
 .activity {
   /* border: 1px solid #0f0; */
   padding: 1rem;
-  width: 12rem;
+  width: 14rem;
   background: var(--prussian-blue);
   box-shadow: 0 0 1rem var(--black);
   border-radius: 0.2rem;
