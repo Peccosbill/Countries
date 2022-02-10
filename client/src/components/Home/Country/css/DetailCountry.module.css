@@ -5,7 +5,7 @@
   width: 90%;
   max-width: 60rem;
   height: 42rem;
-  background: var(--rich-black);
+  background: var(--box-country-detail-background);
   box-shadow: 0 0 1rem var(--rich-black);
   border-radius: 0.2rem;
   display: flex;
@@ -32,10 +32,10 @@
 .info h3 {
   padding: 0.8rem;
   margin-bottom: 1rem;
-  background: var(--prussian-blue);
+  background: var(--prussian-blue-dark);
   background: linear-gradient(
     90deg,
-    var(--prussian-blue) 0%,
+    var(--prussian-blue-dark) 0%,
     rgba(124, 124, 124, 0) 90%
   );
   border-radius: 0.2rem;
@@ -82,10 +82,10 @@
 
 .infoActivity h4 {
   padding: 0.8rem;
-  background: var(--prussian-blue);
+  background: var(--prussian-blue-dark);
   background: linear-gradient(
     90deg,
-    var(--prussian-blue) 0%,
+    var(--prussian-blue-dark) 0%,
     rgba(124, 124, 124, 0) 90%
   );
   border-radius: 0.2rem;

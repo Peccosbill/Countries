@@ -32,7 +32,6 @@ function Countries() {
   const [currentPage, setCurrentPage] = useState(1);
   const [countriesPerPage] = useState(10);
 
-  // - - - - - - -> PAGINACION <- - - - - - -
   useEffect(() => {
     setIsLoading(true);
     HelpGetCountries(`http://localhost:3001/countries`).then((res) => {
@@ -42,7 +41,8 @@ function Countries() {
       }, 1000);
     });
   }, []);
-
+  
+  // - - - - - - -> PAGINACION <- - - - - - -
   // MOSTRAR LOS PAISES ACTUALES
   const indexOfLastCountries = currentPage * countriesPerPage;
   const indexOfFirstCountries = indexOfLastCountries - countriesPerPage;

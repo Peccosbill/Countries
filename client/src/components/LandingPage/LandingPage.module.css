@@ -1,7 +1,7 @@
 .LandingPage {
   width: 100%;
   height: 100vh;
-  background-image: url("https://wallpapertops.com/walldb/original/c/2/1/82228.jpg"); 
+  background-image: url("../../img/landing.jpg"); 
   background-size: cover;
   background-position: center;
   display: flex;
@@ -10,8 +10,22 @@
 }
 
 .link {
-  filter:drop-shadow(0 0 2rem var(--black));
+  text-decoration: none;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 0.3rem;
+  background: rgba(255, 255, 255, 0.185);
+  box-shadow: 0 2rem 2rem var(--black);
   transition: all 0.2s;
+}
+
+.link h2 {
+  color: white;
+  font-size: 4rem;
+  text-shadow: 0 0 1rem var(--black);
 }
 
 .link:hover {

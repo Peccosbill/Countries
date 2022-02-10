@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 :root {
   --white: #fff;
@@ -21,7 +21,7 @@
 
 body {
   margin: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: var(--prussian-blue);
@@ -30,4 +30,47 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.is-dark-mode {
+  --white: #fff;
+  --white-transparent: rgba(255, 255, 255, 0.514);
+  --black: #000;
+  --rich-black: #0c101b;
+  --rich-black-mode: #0c101b;
+  --prussian-blue: #1d283a;
+  --prussian-blue-dark: #1d283a;
+  --independence: #3c4f6c;
+  --box-country-detail-background: #0c101b;
+  --button-into: #fff;
+  --background-into: rgba(24, 31, 41, 0.6);
+
+  --space-cadet: rgb(28, 40, 75);
+  --turquoise: rgba(111, 228, 218, 0.849);
+  transition: 2s;
+  will-change: transform;
+}
+
+.is-light-mode {
+  --white: #0c101b;
+  --white-transparent: rgba(24, 31, 41, 0.6);
+  --black: #000;
+  --rich-black: #0c101b;
+  --rich-black-mode: rgb(250, 253, 246);
+  --prussian-blue: rgb(250, 253, 246);
+  --prussian-blue-dark: #1d283a63;
+  --independence: rgb(250, 253, 246);
+  --independence-button: #3c4f6c;
+  --box-country-detail-background: rgb(250, 253, 246);
+  --blue-munsell: #32d3c5;
+  --blue-munsell-dark: #22948a;
+  --button-into: #fff;
+  --background-into: rgba(24, 31, 41, 0.6);
+
+  --space-cadet: rgb(28, 40, 75);
+
+  --candy-pink: rgb(233, 96, 106);
+  --turquoise: rgb(233, 96, 106);
+  transition: 2s;
+  will-change: transform;
 }

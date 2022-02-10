@@ -43,11 +43,12 @@
   box-shadow: 0 0 1rem var(--rich-black);
   margin: 0 auto;
   margin-bottom: 1rem;
-  width: 13rem;
+  width: 14rem;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;
+  border-radius: 0.2rem;
 }
 
 .searchInput {
@@ -61,15 +62,18 @@
 }
 
 .searchInput::placeholder {
-  color: rgba(255, 255, 255, 0.562);
+  color: var(--white-transparent);
 }
 
 .searchButton {
-  padding: 0.5rem;
+  width: 3rem;
   height: 2.2rem;
   border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 0 0.2rem 0.2rem 0;
-  background: var(--independence);
+  background: var(--independence-button);
   cursor: pointer;
 }
 

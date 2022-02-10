@@ -11,6 +11,7 @@
   text-decoration: none;
   color: var(--white);
   background: var(--independence);
+  box-shadow: 0 0 0.5rem var(--rich-black);
   width: 2.8rem;
   height: 2.8rem;
   display: flex;

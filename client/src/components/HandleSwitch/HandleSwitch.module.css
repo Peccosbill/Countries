@@ -1,0 +1,55 @@
+.darkMode {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox {
+  display: none;
+}
+
+.checkbox:checked ~ .switch::before {
+  transform: translateX(0rem);
+}
+
+.switch {
+  position: relative;
+  height: 2rem;
+  display: block;
+  border-radius: 1rem;
+  color: transparent;
+  background: var(--turquoise);
+  margin: 0.5rem;
+  padding: 0.15rem;
+  box-sizing: border-box;
+  cursor: pointer;
+  user-select: none;
+}
+
+.switch::before {
+  content: "";
+  display: block;
+  width: 1.6rem;
+  height: 1.6rem;
+  background: var(--space-cadet);
+  border-radius: 50%;
+  transform: translateX(1.5rem);
+  transition: 0.3s;
+  will-change: transform;
+}
+
+.sunMoon {
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sun {
+  position: absolute;
+}
+
+.moon {
+  position: absolute;
+}
