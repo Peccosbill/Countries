@@ -1,5 +1,5 @@
 import React from "react";
-import Nav from "../Nav/Nav";
+// import Nav from "../Nav/Nav";
 import Country from "./Country/Countries";
 import styled from "styled-components";
 // import styles from "./Home.module.css";
@@ -15,7 +15,7 @@ function Home() {
   
   return (
     <HomePage>
-      <Nav />
+      {/* <Nav /> */}
       <Country />
     </HomePage>
   );

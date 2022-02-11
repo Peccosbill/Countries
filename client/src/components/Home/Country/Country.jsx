@@ -5,7 +5,7 @@ import styles from "./css/Country.module.css";
 function Country({ id, flag, name, capital, continent, languages }) {
   return (
     <div className={styles.card} key={id}>
-      <NavLink className={styles.link}to={`/country/${id}`}>
+      <NavLink className={styles.link}to={`/home/country/${id}`}>
         <img className={styles.flag} src={flag} alt={name} />
         <div className={styles.info}>
           <h3>

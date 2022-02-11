@@ -16,7 +16,7 @@ function Nav() {
         <img className={styles.logo} src={logo} alt="Logo" />
       </NavLink>
       <div className={styles.activityAndSwitch}>
-        <NavLink className={styles.link} to="/addactivity">
+        <NavLink className={styles.link} to="/home/addactivity">
           AÑADIR ACTIVIDAD
           <img className={styles.plus} src={plus} alt="Add" />
         </NavLink>
