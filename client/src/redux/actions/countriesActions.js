@@ -1,8 +1,6 @@
 import axios from "axios";
 export const GET_COUNTRIES = "GET_COUNTRIES";
 export const GET_COUNTRY_ID = "GET_COUNTRY_ID";
-export const GET_COUNTRY_BY_NAME = "GET_COUNTRY_BY_NAME";
-export const GET_COUNTRY_BY_CONTINENT = "GET_COUNTRY_BY_CONTINENT";
 export const RESET_COUNTRY = "RESET_COUNTRY";
 
 export function getCountries() {
