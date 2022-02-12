@@ -1,9 +1,10 @@
-import {  Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import DetailCountry from "./components/Home/Country/DetailCountry";
 import Home from "./components/Home/Home";
 import LandingPage from "./components/LandingPage/LandingPage";
 import Nav from "./components/Nav/Nav"
 import AddActivity from "./components/AddActivity/AddActivity";
+import Error404 from "./components/Error/Error404";
 
 function App() {
   return (
@@ -17,8 +18,7 @@ function App() {
         render={({ match }) => <DetailCountry id={match.params.id} />}
       />
       <Route exact path={"/home/addactivity"} component={AddActivity} />
-      {/* <Route path="/404" component={Error404} />
-      <Redirect from="*" to="/404" /> */}
+      <Route path="*" component={Error404} />
     </div>
   );
 }
