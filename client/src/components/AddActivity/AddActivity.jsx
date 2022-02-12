@@ -6,6 +6,8 @@ import { addActivityInCountries } from "../../redux/actions/activityActions";
 import styles from "./AddActivity.module.css";
 import home from "../../img/home.png";
 
+const dificults = [1, 2, 3, 4, 5];
+
 //  - - - - - COMPONENTE - - - - -
 function AddActivity() {
   const dispatch = useDispatch();
@@ -149,21 +151,11 @@ function AddActivity() {
               onChange={(e) => handleChange(e)}
             >
               <option value="DEFAULT">Seleccionar Dificultad </option>
-              <option name="dificult" value="1">
-                1
-              </option>
-              <option name="dificult" value="2">
-                2
-              </option>
-              <option name="dificult" value="3">
-                3
-              </option>
-              <option name="dificult" value="4">
-                4
-              </option>
-              <option name="dificult" value="5">
-                5
-              </option>
+              {dificults.map((d) => (
+                <option name="dificult" value={d}>
+                  {d}
+                </option>
+              ))}
             </select>
           </div>
 
