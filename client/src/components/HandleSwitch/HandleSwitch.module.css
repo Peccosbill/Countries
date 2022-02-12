@@ -8,7 +8,7 @@
 }
 
 .checkbox:checked ~ .switch::before {
-  transform: translateX(0rem);
+  transform: translateX(0.1rem);
 }
 
 .switch {
@@ -19,7 +19,7 @@
   color: transparent;
   background: var(--turquoise);
   margin: 0.5rem;
-  padding: 0.15rem;
+  padding: 0.16rem;
   box-sizing: border-box;
   cursor: pointer;
   user-select: none;
@@ -32,7 +32,7 @@
   height: 1.6rem;
   background: var(--space-cadet);
   border-radius: 50%;
-  transform: translateX(1.5rem);
+  transform: translateX(1.6rem);
   transition: 0.3s;
   will-change: transform;
 }

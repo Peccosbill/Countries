@@ -53,7 +53,7 @@ function AddActivity() {
   }
 
   // POST DE LA INFO DEL FORMULARIO
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
 
     // Validar que se hayan completado todos los campos
@@ -129,7 +129,7 @@ function AddActivity() {
             <span>Nombre</span>
             <input
               className={styles.input}
-              type="search"
+              type="text"
               placeholder="Introduce actividad"
               name="name"
               value={`${addActivity.name

@@ -39,28 +39,3 @@ export function resetCountry() {
   };
 }
 
-// export function getCountryByName(name) {
-//   return async function (dispatch) {
-//     return await axios
-//       .get(`http://localhost:3001/countries?name=${name}`)
-//       .then((response) => {
-//         dispatch({
-//           type: GET_COUNTRY_BY_NAME,
-//           payload: response.data,
-//         });
-//       });
-//   };
-// }
-
-// export function getCountryByContinent(continent) {
-//   return async function (dispatch) {
-//     return await axios
-//       .get(`http://localhost:3001/continent/${continent}`)
-//       .then((response) => {
-//         dispatch({
-//           type: GET_COUNTRY_BY_CONTINENT,
-//           payload: response.data,
-//         });
-//       });
-//   };
-// }

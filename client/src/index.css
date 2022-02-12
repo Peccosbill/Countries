@@ -27,6 +27,18 @@ body {
   background: var(--prussian-blue);
 }
 
+body::-webkit-scrollbar {
+  display: none;
+  /* width: 0.5rem;
+  background-color: #494949; */
+}
+
+/* body::-webkit-scrollbar-thumb {
+  width: 5px;
+  background-color: #640d14;
+  border-radius: 5px;
+} */
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -47,8 +59,6 @@ code {
 
   --space-cadet: rgb(28, 40, 75);
   --turquoise: rgba(111, 228, 218, 0.849);
-  /* transition: 2s;
-  will-change: transform; */
 }
 
 .is-light-mode {
@@ -71,6 +81,4 @@ code {
 
   --candy-pink: rgb(233, 96, 106);
   --turquoise: rgb(233, 96, 106);
-  /* transition: 2s;
-  will-change: transform; */
 }

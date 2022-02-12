@@ -5,40 +5,6 @@
   flex-direction: column;
 }
 
-.selectors {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-}
-
-.select {
-  box-shadow: 0 0 1rem var(--rich-black);
-  font-size: 1rem;
-  margin: 1rem 2rem 1rem 2rem;
-  padding: 0.5rem;
-  width: 13rem;
-  height: 2.2rem;
-  color: var(--white);
-  border: none;
-  border-radius: 0.2rem;
-  cursor: pointer;
-  outline: none;
-  background: var(--independence);
-  background-image: url(../../../../img/arrow.png);
-  background-repeat: no-repeat;
-  background-position: 95%;
-  background-size: 1.5rem;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -o-appearance: none;
-  appearance: none;
-}
-
-.select option {
-  background: var(--prussian-blue);
-}
-
 .searchCountry {
   box-shadow: 0 0 1rem var(--rich-black);
   margin: 0 auto;
