@@ -28,7 +28,7 @@ function AddActivity() {
   // MODIFICAR EL ESTADO DE "searchCountry.paisEncontrado" SEGÚN LO QUE LE PASE POR EL "addActivity.country"
   const fetchCountries = async () => {
     await axios
-      .get(`http://localhost:3001/countries?name=${addActivity.country}`)
+      .get(`/countries?name=${addActivity.country}`)
       .then((res) =>
         setSearchCountry({
           ...searchCountry,

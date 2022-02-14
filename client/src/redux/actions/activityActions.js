@@ -5,7 +5,7 @@ export const GET_ALL_ACTIVITIES = "GET_ALL_ACTIVITIES";
 export function addActivityInCountries(activity) {
   return async function (dispatch) {
     return await axios
-      .post(`http://localhost:3001/activity`, activity)
+      .post(`/activity`, activity)
       .then((response) => {
         return dispatch({
           type: ADD_ACTIVITY_IN_COUNTRIES,
@@ -18,7 +18,7 @@ export function addActivityInCountries(activity) {
 export function getAllActivities() {
   return async function (dispatch) {
     return await axios
-      .get(`http://localhost:3001/activity`)
+      .get(`/activity`)
       .then((response) => {
         return dispatch({
           type: GET_ALL_ACTIVITIES,

@@ -10,10 +10,11 @@ import Spinner from "../../Spinner/Spinner";
 import home from "../../../img/home.png";
 
 function DetailCountry({ id }) {
-  const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
   const country = useSelector((state) => state.country);
-
+  
+  const [isLoading, setIsLoading] = useState(true);
+  
   useEffect(() => {
     setIsLoading(true);
     setTimeout(() => {

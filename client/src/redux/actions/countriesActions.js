@@ -6,7 +6,7 @@ export const RESET_COUNTRY = "RESET_COUNTRY";
 export function getCountries() {
   return async function (dispatch) {
     return await axios
-      .get("http://localhost:3001/countries")
+      .get("/countries")
       .then((response) => {
         dispatch({
           type: GET_COUNTRIES,
@@ -19,7 +19,7 @@ export function getCountries() {
 export function getCountryId(id) {
   return async function (dispatch) {
     return await axios
-      .get(`http://localhost:3001/countries/${id}`)
+      .get(`/countries/${id}`)
       .then((response) => {
         dispatch({
           type: GET_COUNTRY_ID,

@@ -25,7 +25,7 @@ function Filters({ setState }) {
 
     // FILTRO POR ACTIVIDAD
     if (activityByCountry !== "") {
-      HelpGetCountries("http://localhost:3001/activityByCountry").then(
+      HelpGetCountries("/activityByCountry").then(
         (res) => {
           setActivityByCountry(res.data);
         }
@@ -60,12 +60,12 @@ function Filters({ setState }) {
         return setState(countries);
       }
       if (alphabet === "A-Z") {
-        HelpGetCountries("http://localhost:3001/az").then((res) => {
+        HelpGetCountries("/az").then((res) => {
           setState(res.data);
         });
       }
       if (alphabet === "Z-A") {
-        HelpGetCountries("http://localhost:3001/za").then((res) => {
+        HelpGetCountries("/za").then((res) => {
           setState(res.data);
         });
       }
@@ -91,12 +91,12 @@ function Filters({ setState }) {
         return setState(countries);
       }
       if (population === "higher") {
-        HelpGetCountries("http://localhost:3001/morePopulation").then((res) => {
+        HelpGetCountries("/morePopulation").then((res) => {
           setState(res.data);
         });
       }
       if (population === "minor") {
-        HelpGetCountries("http://localhost:3001/lessPopulation").then((res) => {
+        HelpGetCountries("/lessPopulation").then((res) => {
           setState(res.data);
         });
       }
