@@ -9,14 +9,14 @@ router.get("/az", async (req, res) => {
   let az = await Country.findAll({
     order: [["name", "ASC"]],
   });
-  return res.status(200).send(az);
+  return res.send(az);
 });
 
 router.get("/za", async (req, res) => {
   let za = await Country.findAll({
     order: [["name", "DESC"]],
   });
-  res.status(200).send(za);
+  res.send(za);
 });
 
 // POR POBLACIÓN
@@ -24,14 +24,14 @@ router.get("/lessPopulation", async (req, res) => {
   let population = await Country.findAll({
     order: [["population", "ASC"]],
   });
-  res.status(200).send(population);
+  res.send(population);
 });
 
 router.get("/morePopulation", async (req, res) => {
   let population = await Country.findAll({
     order: [["population", "DESC"]],
   });
-  res.status(200).send(population);
+  res.send(population);
 });
 
 // POR CONTINENTE
@@ -45,7 +45,7 @@ router.get("/continent/:continent", async (req, res) => {
         continent: continent,
       },
     });
-    res.status(200).send(cont);
+    res.send(cont);
   } catch (error) {
     res.send(error);
   }
@@ -54,12 +54,12 @@ router.get("/continent/:continent", async (req, res) => {
 //  POR ACTIVIDAD
 router.get("/activity", async (req, res) => {
   const activity = await Activity.findAll();
-  res.status(200).send(activity);
+  res.send(activity);
 });
 
 router.get("/activityByCountry", async (req, res) => {
   const activityByCountry = await CountryActivities.findAll();
-  res.status(200).send(activityByCountry);
+  res.send(activityByCountry);
 });
 
 router.get("/activityByCountry/:activityId", async (req, res) => {
@@ -67,7 +67,7 @@ router.get("/activityByCountry/:activityId", async (req, res) => {
   const activityByCountry = await CountryActivities.findAll({
     where: { activityId: activityId },
   });
-  res.status(200).send(activityByCountry);
+  res.send(activityByCountry);
 });
 
 module.exports = router;

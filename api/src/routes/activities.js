@@ -19,7 +19,7 @@ router.post("/activity", async (req, res) => {
   });
 
   activity.addCountry(ActivityCountry);
-  res.status(200).send("Actividad creada exitosamente");
+  res.send("Actividad creada exitosamente");
 });
 
 module.exports = router;
