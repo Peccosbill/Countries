@@ -8,17 +8,6 @@
   <img height="200" src="./countries.png" />
 </p>
 
-### Puedo usar librerías de estilos? No.
-### Puedo usar otro tipo de librerías? NO.
-### Ni siquiera react icons? No.
-### Puedo usar axios? Si.
-### Sweet alert cuenta como libreria? Si. La puedo usar? No.
-### Tengo que leer el Readme? Si.
-### ¿Puedo usar X endpoint? Esta en el Readme ?  Entonces si : Entonces no
-### El formulario tiene que ser controlado con React? SI.
-### Puedo usar styled components? SI.
-### A quien debo consultarle? Si es duda tecnica, a mi, si es duda sobre la consigna, a su corrector
-
 
 ## Objetivos del Proyecto
 
