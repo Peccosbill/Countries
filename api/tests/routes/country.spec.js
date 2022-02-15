@@ -17,17 +17,28 @@ describe("Country routes", () => {
   );
 
   describe("GET /countries", () => {
-    it("should get 200", () => agent.get("/countries").expect(200));
+    it("should get 200", (done) => {
+      agent
+        .get("/countries")
+        .set("Accept", "aplication/json")
+        .expect("Content-Type", /json/)
+        .expect(200, done);
+    });
   });
 
   describe("GET /countries/:id", () => {
     it("Devuelve 200 si le paso un id", (done) => {
-      agent.get("/countries/BRA").then(() => done());
+      agent
+        .get("/countries/BRA")
+        .set("Accept", "aplication/json")
+        .expect("Content-Type", /json/)
+        .expect(200, done);
     });
     it("Devuelve 404 si se le pasa un id incorrecto", (done) => {
       agent.get("/countries/hello").then(() => done());
     });
   });
+
   describe("GET /countries?name=name", () => {
     it("Devuelve 200 si le paso un nombre correcto", (done) => {
       agent.get("/countries?name=qatar").then(() => done());

@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Probamos el componente <Nav /> debería mostrar <Nav /> correctamente 1`] = `ShallowWrapper {}`;
