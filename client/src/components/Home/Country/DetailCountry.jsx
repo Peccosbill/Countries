@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import {
-  getCountryId,
-  resetCountry,
-} from "../../../redux/actions/countriesActions";
+import { getCountryId } from "../../../redux/actions/countriesActions";
 import styles from "./css/DetailCountry.module.css";
 import Spinner from "../../Spinner/Spinner";
 import home from "../../../img/home.png";
@@ -12,17 +9,14 @@ import home from "../../../img/home.png";
 function DetailCountry({ id }) {
   const dispatch = useDispatch();
   const country = useSelector((state) => state.country);
-  
+
   const [isLoading, setIsLoading] = useState(true);
-  
+
   useEffect(() => {
     setIsLoading(true);
     setTimeout(() => {
       dispatch(getCountryId(id));
       setIsLoading(false);
-      return () => {
-        dispatch(resetCountry());
-      };
     }, 1000);
   }, [dispatch, id]);
 
@@ -52,10 +46,11 @@ function DetailCountry({ id }) {
           </p>
           <p>
             <span className={styles.span}>Area: </span>
-            {new Intl.NumberFormat('es-MX').format(country.area)} km2
+            {new Intl.NumberFormat("es-MX").format(country.area)} km2
           </p>
           <p>
-            <span className={styles.span}>Población:</span> {new Intl.NumberFormat('es-MX').format(country.population)}
+            <span className={styles.span}>Población:</span>{" "}
+            {new Intl.NumberFormat("es-MX").format(country.population)}
           </p>
           <p>
             <span className={styles.span}>Ver ubicación:</span>

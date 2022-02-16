@@ -12,7 +12,6 @@ const HomePage = styled.div`
 function Home() {
   return (
     <HomePage>
-      {/* <Nav /> */}
       <Country />
     </HomePage>
   );

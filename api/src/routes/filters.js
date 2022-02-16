@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { Country, Activity, CountryActivities } = require("../db");
+const { Country, CountryActivities } = require("../db");
 
 const router = Router();
 // - - - - RUTAS PARA FILTROS - - - -
@@ -52,15 +52,6 @@ router.get("/continent/:continent", async (req, res) => {
 });
 
 //  POR ACTIVIDAD
-router.get("/activity", async (req, res) => {
-  const activity = await Activity.findAll();
-  res.send(activity);
-});
-
-router.get("/activityByCountry", async (req, res) => {
-  const activityByCountry = await CountryActivities.findAll();
-  res.send(activityByCountry);
-});
 
 router.get("/activityByCountry/:activityId", async (req, res) => {
   const { activityId } = req.params;

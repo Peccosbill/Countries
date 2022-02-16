@@ -25,11 +25,9 @@ function Filters({ setState }) {
 
     // FILTRO POR ACTIVIDAD
     if (activityByCountry !== "") {
-      HelpGetCountries("/activityByCountry").then(
-        (res) => {
-          setActivityByCountry(res.data);
-        }
-      );
+      HelpGetCountries("/activityByCountry").then((res) => {
+        setActivityByCountry(res.data);
+      });
     }
 
     if (activity !== "") {
@@ -37,15 +35,15 @@ function Filters({ setState }) {
         setActivity("");
         return setState(countries);
       }
-      const activityFound = activityByCountry.filter((a) => {
-        return a.activityId.toString() === activity;
+      const activityFoundInCountry = activityByCountry.filter((a) => {
+        return a.activityId === Number(activity);
       });
-
+      // console.log(activityFoundInCountry);
       let countriesToShow = [];
 
       for (let i = 0; i < countries.length; i++) {
-        for (let j = 0; j < activityFound.length; j++) {
-          if (countries[i].id === activityFound[j].countryId) {
+        for (let j = 0; j < activityFoundInCountry.length; j++) {
+          if (countries[i].id === activityFoundInCountry[j].countryId) {
             countriesToShow.push(countries[i]);
           }
         }

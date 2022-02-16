@@ -34,18 +34,18 @@ describe("Country routes", () => {
         .expect("Content-Type", /json/)
         .expect(200, done);
     });
-    it("Devuelve 404 si se le pasa un id incorrecto", (done) => {
-      agent.get("/countries/hello").then(() => done());
-    });
+    it("Devuelve 404 si se le pasa un id incorrecto", function () {
+        agent.get("/countries/hello").expect(404);
+      });
   });
 
   describe("GET /countries?name=name", () => {
-    it("Devuelve 200 si le paso un nombre correcto", (done) => {
-      agent.get("/countries?name=qatar").then(() => done());
-    });
-    it("Devuelve 404 si le paso un nombre incorrecto", (done) => {
-      agent.get("/countries?name=asdfsadf").then(() => done());
-    });
+    it("Devuelve 200 si le paso un nombre correcto", function () {
+        agent.get("/countries?name=qatar").expect(200);
+      });
+    it("Devuelve 404 si le paso un nombre incorrecto", function () {
+        agent.get("/countries?name=asdfsadf").expect(404);
+      });
   });
 
   //Tests de Models
@@ -64,10 +64,19 @@ describe("Country routes", () => {
   });
 
   describe("Validators", () => {
-    beforeEach(() => Activity.sync({ force: true }));
+    beforeEach(async () => await Activity.sync({ force: true }));
     describe("name", () => {
       it("Deberia trabajar bien si le paso un nombre", () => {
         Activity.create({ name: "correr" });
+      });
+      it("Debería retornar error si le paso null como nombre", (done) => {
+        Activity.create({
+          name: null,
+        })
+          .then(() => {
+            done(new Error("Error:It requires a name"));
+          })
+          .catch(() => done());
       });
     });
   });

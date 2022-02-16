@@ -47,7 +47,7 @@ router.get("/countries", async (req, res, next) => {
       if (result.length === 0) {
         res.status(404).send("No existe el país buscado");
       } else {
-        res.json(result);
+        res.status(200).json(result);
       }
     } catch (error) {
       res.status(404).send(error);
@@ -60,9 +60,9 @@ router.get("/countries", async (req, res, next) => {
     });
     if (results.length === 0) {
       getApi();
-      res.json(Country.findAll());
+      res.status(200).json(Country.findAll());
     } else {
-      res.json(results);
+      res.status(200).json(results);
     }
   }
 });
@@ -75,7 +75,7 @@ router.get("/countries/:id", async (req, res) => {
         model: Activity,
       },
     });
-    res.json(country);
+    res.status(200).json(country);
   } catch (error) {
     res.status(404).send(error.message);
   }

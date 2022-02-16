@@ -19,10 +19,8 @@ function Countries() {
   useEffect(() => {
     setIsLoading(true);
     HelpGetCountries(`/countries`).then((res) => {
-      setTimeout(() => {
-        setIsLoading(false);
-        setState(res.data);
-      }, 1000);
+      setIsLoading(false);
+      setState(res.data);
     });
   }, []);
 
@@ -35,7 +33,9 @@ function Countries() {
     indexOfLastCountries
   );
   // CAMBIAR DE PÁGINA
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  function paginate(pageNumber) {
+    return setCurrentPage(pageNumber);
+  }
 
   // -< -< -< -<  BUSCADOR >- >- >- >-
   function onSearch(country) {
@@ -43,10 +43,8 @@ function Countries() {
       setIsLoading(true);
       HelpGetCountries(`/countries/?name=${country}`)
         .then((res) => {
-          return setTimeout(() => {
-            setIsLoading(false);
-            setState(res.data);
-          }, 1000);
+          setIsLoading(false);
+          setState(res.data);
         })
         .catch((err) => {
           HelpGetCountries("/countries").then((res) => {
@@ -66,7 +64,7 @@ function Countries() {
         onSubmit={(e) => {
           e.preventDefault();
           onSearch(country);
-          setCountry([]);
+          setCountry("");
         }}
       >
         <div className={styles.searchCountry}>

@@ -22,4 +22,14 @@ router.post("/activity", async (req, res) => {
   res.send("Actividad creada exitosamente");
 });
 
+router.get("/activity", async (req, res) => {
+  const activity = await Activity.findAll();
+  res.send(activity);
+});
+
+router.get("/activityByCountry", async (req, res) => {
+  const activityByCountry = await CountryActivities.findAll();
+  res.send(activityByCountry);
+});
+
 module.exports = router;
