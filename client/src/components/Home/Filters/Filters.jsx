@@ -50,6 +50,7 @@ function Filters({ setState, setCurrentPage }) {
       }
       setCurrentPage(1);
       setState(countriesToShow);
+      setActivity("");
     }
 
     // FILTRO POR ORDEN ALFABÉTICO
@@ -62,12 +63,14 @@ function Filters({ setState, setCurrentPage }) {
         HelpGetCountries("/az").then((res) => {
           setCurrentPage(1);
           setState(res.data);
+          setAlphabet("");
         });
       }
       if (alphabet === "Z-A") {
         HelpGetCountries("/za").then((res) => {
           setCurrentPage(1);
           setState(res.data);
+          setAlphabet("");
         });
       }
     }
@@ -82,7 +85,7 @@ function Filters({ setState, setCurrentPage }) {
       );
       setCurrentPage(1);
       setState(countryByContinent);
-      // console.log(countryByContinent);
+      setContinent("");
     }
 
     //  FILTRO POR POBLACIÓN
@@ -95,12 +98,14 @@ function Filters({ setState, setCurrentPage }) {
         HelpGetCountries("/morePopulation").then((res) => {
           setCurrentPage(1);
           setState(res.data);
+          setPopulation("");
         });
       }
       if (population === "minor") {
         HelpGetCountries("/lessPopulation").then((res) => {
           setCurrentPage(1);
           setState(res.data);
+          setPopulation("");
         });
       }
     }
