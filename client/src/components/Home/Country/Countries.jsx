@@ -81,7 +81,7 @@ function Countries() {
         </div>
       </form>
       {/* -< -< -< -< FILTROS >- >- >- >- */}
-      <Filters setState={setState} />
+      <Filters setState={setState} setCurrentPage={setCurrentPage} />
       {/* -< -< -< -< PAÍSES >- >- >- >- */}
       {isLoading ? (
         <Spinner />
@@ -101,7 +101,7 @@ function Countries() {
           })}
         </div>
       )}
-      {/* -< -< -< -< PAÍSES >- >- >- >- */}
+      {/* -< -< -< -< PAGINADO >- >- >- >- */}
       <Pagination
         countriesPerPage={countriesPerPage}
         totalCountries={state.length}

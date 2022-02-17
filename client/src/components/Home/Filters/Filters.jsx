@@ -5,7 +5,7 @@ import { getAllActivities } from "../../../redux/actions/activityActions";
 import { getCountries } from "../../../redux/actions/countriesActions";
 import styles from "./Filters.module.css";
 
-function Filters({ setState }) {
+function Filters({ setState, setCurrentPage }) {
   const dispatch = useDispatch();
   const activities = useSelector((state) => state.activities);
   const countries = useSelector((state) => state.countries);
@@ -48,6 +48,7 @@ function Filters({ setState }) {
           }
         }
       }
+      setCurrentPage(1);
       setState(countriesToShow);
     }
 
@@ -59,11 +60,13 @@ function Filters({ setState }) {
       }
       if (alphabet === "A-Z") {
         HelpGetCountries("/az").then((res) => {
+          setCurrentPage(1);
           setState(res.data);
         });
       }
       if (alphabet === "Z-A") {
         HelpGetCountries("/za").then((res) => {
+          setCurrentPage(1);
           setState(res.data);
         });
       }
@@ -77,9 +80,9 @@ function Filters({ setState }) {
       const countryByContinent = countries.filter(
         (c) => c.continent === continent
       );
-
+      setCurrentPage(1);
       setState(countryByContinent);
-      console.log(countryByContinent);
+      // console.log(countryByContinent);
     }
 
     //  FILTRO POR POBLACIÓN
@@ -90,11 +93,13 @@ function Filters({ setState }) {
       }
       if (population === "higher") {
         HelpGetCountries("/morePopulation").then((res) => {
+          setCurrentPage(1);
           setState(res.data);
         });
       }
       if (population === "minor") {
         HelpGetCountries("/lessPopulation").then((res) => {
+          setCurrentPage(1);
           setState(res.data);
         });
       }
