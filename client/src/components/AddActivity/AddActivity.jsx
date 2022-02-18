@@ -2,7 +2,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { addActivityInCountries } from "../../redux/actions/activityActions";
+import {
+  addActivityInCountries,
+  getAllActivities,
+} from "../../redux/actions/activityActions";
 import styles from "./AddActivity.module.css";
 import home from "../../img/home.png";
 
@@ -11,6 +14,7 @@ const dificults = [1, 2, 3, 4, 5];
 //  - - - - - COMPONENTE - - - - -
 function AddActivity() {
   const dispatch = useDispatch();
+  const activities = useSelector((state) => state.activities);
 
   // Estado del formulario
   const [addActivity, setAddActivity] = useState({
@@ -27,22 +31,21 @@ function AddActivity() {
 
   // MODIFICAR EL ESTADO DE "searchCountry.paisEncontrado" SEGÚN LO QUE LE PASE POR EL "addActivity.country"
   const fetchCountries = async () => {
-    await axios
-      .get(`/countries?name=${addActivity.country}`)
-      .then((res) =>
-        setSearchCountry({
-          ...searchCountry,
-          paisEncontrado: res.data,
-        })
-      );
+    await axios.get(`/countries?name=${addActivity.country}`).then((res) =>
+      setSearchCountry({
+        ...searchCountry,
+        paisEncontrado: res.data,
+      })
+    );
   };
 
   useEffect(() => {
+    dispatch(getAllActivities());
     if (addActivity.country !== "") {
       fetchCountries();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [addActivity.country]);
+  }, [addActivity.country, dispatch]);
 
   // ESCUCHAR CAMBIOS EN EL FORMULARIO
   function handleChange(e) {
@@ -67,6 +70,16 @@ function AddActivity() {
     ) {
       return alert("Todos los campos deben estar completos");
     }
+
+    //Validar que la actividad no exista ya
+    const existentActivity = activities.find(
+      (a) => a.name === addActivity.name
+    );
+    if (existentActivity) {
+      return alert("Esa actividad ya existe");
+    }
+
+    //Validar que haya al menos un país agregado
     if (searchCountry.paisSeleccionado.length === 0) {
       return alert("Debes seleccionar al menos un país");
     } else {
@@ -81,6 +94,7 @@ function AddActivity() {
       dispatch(addActivityInCountries(actividad));
       alert("Actividad creada");
     }
+
     //RESETEO EL FORMULARIO
     setAddActivity({
       name: "",
