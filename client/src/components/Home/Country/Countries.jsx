@@ -44,6 +44,7 @@ function Countries() {
       HelpGetCountries(`/countries/?name=${country}`)
         .then((res) => {
           setIsLoading(false);
+          setCurrentPage(1);
           setState(res.data);
         })
         .catch((err) => {
