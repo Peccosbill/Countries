@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 import {
   addActivityInCountries,
   getAllActivities,
@@ -28,6 +30,8 @@ function AddActivity() {
     paisEncontrado: [],
     paisSeleccionado: [],
   });
+
+  const MySwal = withReactContent(Swal);
 
   // MODIFICAR EL ESTADO DE "searchCountry.paisEncontrado" SEGÚN LO QUE LE PASE POR EL "addActivity.country"
   const fetchCountries = async () => {
@@ -68,7 +72,16 @@ function AddActivity() {
       !addActivity.dificult ||
       !addActivity.season
     ) {
-      return alert("Todos los campos deben estar completos");
+      return MySwal.fire({
+        title: `Todos los campos deben estar completos`,
+        icon: "warning",
+        confirmButtonText: "OK",
+        backdrop: `
+        rgba(0,0,123,0.4)
+        left top
+        no-repeat
+      `,
+      });
     }
 
     //Validar que la actividad no exista ya
@@ -76,12 +89,30 @@ function AddActivity() {
       (a) => a.name === addActivity.name
     );
     if (existentActivity) {
-      return alert("Esa actividad ya existe");
+      return MySwal.fire({
+        title: `La actividad ya existe`,
+        icon: "warning",
+        confirmButtonText: "OK",
+        backdrop: `
+        rgba(0,0,123,0.4)
+        left top
+        no-repeat
+      `,
+      });
     }
 
     //Validar que haya al menos un país agregado
     if (searchCountry.paisSeleccionado.length === 0) {
-      return alert("Debes seleccionar al menos un país");
+      return MySwal.fire({
+        title: `Debes agregar al menos un País`,
+        icon: "warning",
+        confirmButtonText: "OK",
+        backdrop: `
+        rgba(0,0,123,0.4)
+        left top
+        no-repeat
+      `,
+      });
     } else {
       const actividad = {
         name: addActivity.name,
@@ -92,7 +123,16 @@ function AddActivity() {
       };
       //EJECUTO LA (ACTION POST)
       dispatch(addActivityInCountries(actividad));
-      alert("Actividad creada");
+      MySwal.fire({
+        title: `Actividad creada exitosamente`,
+        icon: "success",
+        confirmButtonText: "OK",
+        backdrop: `
+        rgba(0,0,123,0.4)
+        left top
+        no-repeat
+      `,
+      });
     }
 
     //RESETEO EL FORMULARIO
@@ -119,7 +159,16 @@ function AddActivity() {
           country: "",
         });
       } else {
-        alert("País ya agregado");
+        MySwal.fire({
+          title: `País ya agregado`,
+          icon: "warning",
+          confirmButtonText: "OK",
+          backdrop: `
+          rgba(0,0,123,0.4)
+          left top
+          no-repeat
+        `,
+        });
       }
     }
   };

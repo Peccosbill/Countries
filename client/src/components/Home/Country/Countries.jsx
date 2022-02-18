@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 import { HelpGetCountries } from "../../../helpers/HelpGetCountries";
 import Country from "./Country";
 import Spinner from "../../Spinner/Spinner";
@@ -15,6 +17,8 @@ function Countries() {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [countriesPerPage] = useState(10);
+
+  const MySwal = withReactContent(Swal);
 
   useEffect(() => {
     setIsLoading(true);
@@ -47,12 +51,21 @@ function Countries() {
           setCurrentPage(1);
           setState(res.data);
         })
-        .catch((err) => {
-          HelpGetCountries("/countries").then((res) => {
+        .catch(() => {
+          HelpGetCountries("http://localhost:3001/countries").then((res) => {
             setIsLoading(false);
             setState(res.data);
           });
-          alert((err = "No se encuentra el país buscado"));
+          return MySwal.fire({
+            title: `No se encuentra el País buscado`,
+            icon: "error",
+            confirmButtonText: "OK",
+            backdrop: `
+              rgba(0,0,123,0.4)
+              left top
+              no-repeat
+            `,
+          });
         });
     }
   }
