@@ -63,32 +63,28 @@ function DetailCountry({ id }) {
       <div className={styles.infoActivity}>
         <h4>Actividades Turísticas</h4>
         <div className={styles.boxActivity}>
-          {country.activities && country.activities.length > 0 ? (
-            country.activities.map((a) => {
-              return (
-                <div className={styles.activity} key={a.id}>
-                  <p>
-                    <span className={styles.span}>Actividad: </span>
-                    {a.name}
-                  </p>
-                  <p>
-                    <span className={styles.span}>Dificultad: </span>
-                    {a.dificult}
-                  </p>
-                  <p>
-                    <span className={styles.span}>Duración: </span>
-                    {a.duration}
-                  </p>
-                  <p>
-                    <span className={styles.span}>Temporada: </span>
-                    {a.season}
-                  </p>
-                </div>
-              );
-            })
-          ) : (
-            <h4>No hay actividades para este País</h4>
-          )}
+          {country.activities.map((a) => {
+            return (
+              <div className={styles.activity} key={a.id}>
+                <p>
+                  <span className={styles.span}>Actividad: </span>
+                  {a.name}
+                </p>
+                <p>
+                  <span className={styles.span}>Dificultad: </span>
+                  {a.dificult}
+                </p>
+                <p>
+                  <span className={styles.span}>Duración: </span>
+                  {a.duration}
+                </p>
+                <p>
+                  <span className={styles.span}>Temporada: </span>
+                  {a.season}
+                </p>
+              </div>
+            );
+          })}
         </div>
       </div>
       <Link className={styles.toHome} to="/home">
