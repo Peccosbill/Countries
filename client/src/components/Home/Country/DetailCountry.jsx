@@ -64,24 +64,24 @@ function DetailCountry({ id }) {
         <h4>Actividades Turísticas</h4>
         <div className={styles.boxActivity}>
           {country.activities && country.activities.length > 0 ? (
-            country.activities.map((act) => {
+            country.activities.map((a) => {
               return (
-                <div className={styles.activity} key={act.id}>
+                <div className={styles.activity} key={a.id}>
                   <p>
                     <span className={styles.span}>Actividad: </span>
-                    {act.name}
+                    {a.name}
                   </p>
                   <p>
                     <span className={styles.span}>Dificultad: </span>
-                    {act.dificult}
+                    {a.dificult}
                   </p>
                   <p>
                     <span className={styles.span}>Duración: </span>
-                    {act.duration}
+                    {a.duration}
                   </p>
                   <p>
                     <span className={styles.span}>Temporada: </span>
-                    {act.season}
+                    {a.season}
                   </p>
                 </div>
               );
