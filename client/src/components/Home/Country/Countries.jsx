@@ -52,6 +52,13 @@ function Countries() {
           setState(res.data);
         })
         .catch(() => {
+<<<<<<< HEAD
+=======
+          HelpGetCountries("http://localhost:3001/countries").then((res) => {
+            setIsLoading(false);
+            setState(res.data);
+          });
+>>>>>>> c4dfb889dd2d5accb8359decfe06fd7d0bc7db78
           MySwal.fire({
             title: `No se encuentra el País buscado`,
             icon: "error",
