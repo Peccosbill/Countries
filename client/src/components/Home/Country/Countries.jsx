@@ -52,20 +52,22 @@ function Countries() {
           setState(res.data);
         })
         .catch(() => {
-          HelpGetCountries("http://localhost:3001/countries").then((res) => {
-            setIsLoading(false);
-            setState(res.data);
-          });
-          return MySwal.fire({
+          MySwal.fire({
             title: `No se encuentra el País buscado`,
             icon: "error",
             confirmButtonText: "OK",
             backdrop: `
-              rgba(0,0,123,0.4)
-              left top
-              no-repeat
-            `,
+             rgba(0,0,123,0.4)
+             left top
+             no-repeat
+           `,
           });
+          return HelpGetCountries("http://localhost:3001/countries").then(
+            (res) => {
+              setIsLoading(false);
+              setState(res.data);
+            }
+          );
         });
     }
   }
