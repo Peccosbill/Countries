@@ -56,7 +56,7 @@ function Countries() {
             setIsLoading(false);
             setState(res.data);
           });
-          return MySwal.fire({
+          MySwal.fire({
             title: `No se encuentra el País buscado`,
             icon: "error",
             confirmButtonText: "OK",
