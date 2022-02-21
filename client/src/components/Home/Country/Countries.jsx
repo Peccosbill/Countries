@@ -62,9 +62,13 @@ function Countries() {
             no-repeat
             `,
           });
-          const res = await HelpGetCountries("http://localhost:3001/countries");
-          setIsLoading(false);
-          setState(res.data);
+          await HelpGetCountries("http://localhost:3001/countries").then(
+            (res) => {
+              setIsLoading(false);
+              setCurrentPage(1);
+              setState(res.data);
+            }
+          );
         });
     }
   }
