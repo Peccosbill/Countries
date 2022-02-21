@@ -42,33 +42,31 @@ function Countries() {
   }
 
   // -< -< -< -<  BUSCADOR >- >- >- >-
-  function onSearch(country) {
+  async function onSearch(country) {
     if (country !== "") {
       setIsLoading(true);
-      HelpGetCountries(`/countries/?name=${country}`)
+      HelpGetCountries(`http://localhost:3001/countries/?name=${country}`)
         .then((res) => {
-          setIsLoading(false);
-          setCurrentPage(1);
-          setState(res.data);
+          return setTimeout(() => {
+            setIsLoading(false);
+            setState(res.data);
+          }, 1000);
         })
-        .catch(async () => {
-          MySwal.fire({
+        .catch(() => {
+          HelpGetCountries("http://localhost:3001/countries").then((res) => {
+            setIsLoading(false);
+            setState(res.data);
+          });
+          return MySwal.fire({
             title: `No se encuentra el País buscado`,
             icon: "error",
             confirmButtonText: "OK",
             backdrop: `
-            rgba(0,0,123,0.4)
-            left top
-            no-repeat
+              rgba(0,0,123,0.4)
+              left top
+              no-repeat
             `,
           });
-          await HelpGetCountries("http://localhost:3001/countries").then(
-            (res) => {
-              setIsLoading(false);
-              setCurrentPage(1);
-              setState(res.data);
-            }
-          );
         });
     }
   }
