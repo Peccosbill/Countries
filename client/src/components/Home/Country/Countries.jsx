@@ -51,30 +51,20 @@ function Countries() {
           setCurrentPage(1);
           setState(res.data);
         })
-        .catch(() => {
-<<<<<<< HEAD
-=======
-          HelpGetCountries("http://localhost:3001/countries").then((res) => {
-            setIsLoading(false);
-            setState(res.data);
-          });
->>>>>>> c4dfb889dd2d5accb8359decfe06fd7d0bc7db78
+        .catch(async () => {
           MySwal.fire({
             title: `No se encuentra el País buscado`,
             icon: "error",
             confirmButtonText: "OK",
             backdrop: `
-             rgba(0,0,123,0.4)
-             left top
-             no-repeat
-           `,
+            rgba(0,0,123,0.4)
+            left top
+            no-repeat
+            `,
           });
-          return HelpGetCountries("http://localhost:3001/countries").then(
-            (res) => {
-              setIsLoading(false);
-              setState(res.data);
-            }
-          );
+          const res = await HelpGetCountries("http://localhost:3001/countries");
+          setIsLoading(false);
+          setState(res.data);
         });
     }
   }
