@@ -45,13 +45,13 @@ function Countries() {
   function onSearch(country) {
     if (country !== "") {
       setIsLoading(true);
-      HelpGetCountries(`http://localhost:3001/countries/?name=${country}`).then(
+      HelpGetCountries(`/countries/?name=${country}`).then(
         (res) => {
           if (res.length > 0) {
             setIsLoading(false);
             return setState(res.data);
           } else {
-            HelpGetCountries("http://localhost:3001/countries").then((res) => {
+            HelpGetCountries("/countries").then((res) => {
               setIsLoading(false);
               setState(res.data);
             });
