@@ -42,21 +42,21 @@ function Countries() {
   }
 
   // -< -< -< -<  BUSCADOR >- >- >- >-
-  async function onSearch(country) {
+  function onSearch(country) {
     if (country !== "") {
       setIsLoading(true);
       HelpGetCountries(`http://localhost:3001/countries/?name=${country}`)
         .then((res) => {
-          return setTimeout(() => {
-            setIsLoading(false);
-            setState(res.data);
-          }, 1000);
+          setIsLoading(false);
+          setState(res.data);
         })
-        .catch(() => {
-          HelpGetCountries("http://localhost:3001/countries").then((res) => {
-            setIsLoading(false);
-            setState(res.data);
-          });
+        .catch(async () => {
+          await HelpGetCountries("http://localhost:3001/countries").then(
+            (res) => {
+              setIsLoading(false);
+              setState(res.data);
+            }
+          );
           return MySwal.fire({
             title: `No se encuentra el País buscado`,
             icon: "error",
