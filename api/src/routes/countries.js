@@ -59,8 +59,8 @@ router.get("/countries", async (req, res, next) => {
       },
     });
     if (results.length === 0) {
-      await getApi();
-      res.status(200).json(await Country.findAll());
+       getApi();
+      res.status(200).json(Country.findAll());
     } else {
       res.status(200).json(results);
     }
